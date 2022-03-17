@@ -1,0 +1,113 @@
+.THIS .searchCriteraButton {
+    width: 100%;
+}
+.THIS .slds-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+.THIS .searchCriteraButton > .slds-button:first-child {
+    border: 2px solid #07344d;
+    color: #07344d;
+    padding: 0.4rem 1rem;
+    font-size: 14px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    width: 100%;
+}
+.THIS .searchCriteraButton > .slds-button:first-child:active,
+.THIS .searchCriteraButton > .slds-button:first-child:hover,
+.THIS .searchCriteraButton > .slds-button:first-child:focus,
+.THIS .slds-is-open.searchCriteraButton > .slds-button:first-child {
+    background: #07344d;
+    color: #fff !important;
+    border-color: #07344d;
+    padding: 0.4rem 1rem;
+    width: 100%;
+    text-transform: uppercase;
+}
+.THIS .searchCriteraButton .slds-button:first-child .slds-button__icon {
+    display: none;
+}
+.THIS .searchCriteraButton > .slds-dropdown {
+    padding: 0.6rem;
+    font-size: 12px;
+    color: #4a4a4a;
+}
+.THIS .searchCriteraButton > .slds-dropdown > .dropdown__list {
+    overflow: hidden;
+}
+.THIS .searchCriteraButton > .slds-dropdown .slds-button {
+    border: 0;
+    font-size: 12px;
+    border-radius: 3px;
+    width: 100%;
+    text-transform: uppercase;
+    padding: 0;
+}
+.THIS .searchCriteraButton > .slds-dropdown .dropdown__list .startDate {
+    padding-bottom: 10px;
+}
+.THIS .slds-is-open.searchCriteraButton > .slds-dropdown .slds-button:first-child {
+    padding: 0;
+}
+.THIS .searchCriteraButton .dropdown__list .slds-button {
+    float: right;
+    clear: both;
+    border-radius: 0;
+}
+.THIS .searchCriteraButton .dropdown__list .applyBtn.slds-button {
+    width: 200px !important;
+    min-width: 200px;
+    height: 32px;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.THIS .searchCriteraButton > .slds-dropdown {
+    border: 1.8px solid #07344d;
+    top: -2px;
+    border-radius: 2px;
+    left: calc(100% + 10px);
+    width: 350px;
+}
+.THIS .searchCriteraButton.slds-is-open > .slds-dropdown .requestTypeCategories .slds-button {
+    justify-content: left;
+    text-align: left;
+    padding: 0px 1.5rem;
+}
+.THIS .searchCriteraButton.slds-is-open > .slds-dropdown .requestTypeFilterBackToCategoryButton {
+    font-size: 11px;
+}
+.THIS .clearSearchFilterButton {
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+.THIS .serviceRequestList {
+    padding-left: 20px;
+}
+.THIS .noRecordsMessage {
+    text-align: center;
+    min-height: 15rem;
+}
+.THIS .noRecordsMessage .line1 {
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: bold
+}
+.THIS .noRecordsMessage .line2 {
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: normal;
+}
+.THIS .noRecordsMessage .icon svg {
+    fill: #5b5b5f;
+    width: 4rem;
+    height: 6rem;
+}
+@media only screen and (max-width: 767px) {
+    .THIS .serviceRequestList {
+        padding-left: 0px;
+    }
+}

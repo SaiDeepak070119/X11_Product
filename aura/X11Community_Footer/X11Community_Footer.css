@@ -1,0 +1,19 @@
+.THIS.wrapper{
+    text-align: center;
+    padding: 30px 0px;
+}
+.THIS .socialLinks li {
+    display: inline-block;
+    margin: 0px 10px;
+}
+.THIS .socialLinks li img {
+    width: 32px;
+    height: 32px;
+}
+.THIS .copyright {
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}

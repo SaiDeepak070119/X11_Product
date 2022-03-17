@@ -1,0 +1,89 @@
+<aura:component controller="X11_FAQArticles"
+                extends="c:X11_BaseSuperComponent"
+                implements="forceCommunity:availableForAllPageTypes,lightning:isUrlAddressable"
+                access="global">
+	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:attribute name="searchKey" type="String"/>
+    <aura:attribute name="articlesList" type="List" />
+    
+    <aura:attribute name="searchInputValue" type="String" default="" />
+    
+    <div class="faq-container">
+        <div class="clb-header">Frequently Asked Questions</div>
+        <div class="filter-container">
+            <div class="slds-grid slds-wrap search-container slds-m-top_xx-large">
+                <div class="slds-col">
+                    
+                        <div class="slds-input-has-icon slds-input-has-icon_right">
+                            <lightning:icon
+                                            class="search-icon slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                                            iconName="utility:search"
+                                            size="x-small"
+                                            alternativeText="Search address"
+                                            />
+                            <!-- Workaround for input field with search icon -->
+                            <input
+                                   name="search"
+                                   aura:id="searchField"
+                                   placeholder="Search by Article Title, Summary"
+                                   label=""
+                                   class="slds-input"
+                                   onkeyup="{!c.onEnterSearch}"
+                                   value = "{!v.searchInputValue}"
+                                   />
+                        </div>
+                           
+                </div>
+            </div>
+        </div>
+        <aura:if isTrue="{!v.articlesList.length == 0}">
+            <div class="faq-list-wrapper slds-m-top_xx-large">
+                <div class="faq-list-title slds-m-bottom_large">No Result Found.</div>
+            </div>
+            <aura:set attribute="else">
+                <div class="faq-list-wrapper slds-m-top_xx-large">
+                    <div class="faq-list-title slds-m-bottom_large">Articles</div>
+                    <lightning:layout>
+                        <lightning:layoutItem class="slds-col accordion-layout">
+                            <div class="accordion-wrapper">
+                                <aura:iteration
+                                                items="{!v.articlesList}"
+                                                var="article"
+                                                indexVar="index"
+                                                >
+                                    <div class="article-wrapper">
+                                            <div
+                                                 class="accordion"
+                                                 name="{!article.Title}"
+                                                 onclick="{!c.handleAccordion}"
+                                                 data-id="{!index}"
+                                                 >
+                                                {!article.Title}
+                                                <lightning:icon
+                                                                class="img_dash slds-m-right_small"
+                                                                iconName="utility:dash"
+                                                                alternativeText="dash"
+                                                                />
+                                                <lightning:icon
+                                                                class="img_add slds-m-right_small"
+                                                                iconName="utility:add"
+                                                                alternativeText="add"
+                                                                />
+                                            </div>
+                                        
+                                        <div class="panel slds-p-vertical_x-large">
+                                                <aura:unescapedHtml value="{!article.Summary}"></aura:unescapedHtml>
+                                            
+                                        </div>
+                                    </div>
+                                </aura:iteration>
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

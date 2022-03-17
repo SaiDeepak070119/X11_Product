@@ -1,0 +1,17 @@
+<aura:component implements="forceCommunity:themeLayout,flexipage:availableForAllPageTypes" 
+                access="global">
+    <ltng:require styles="{!$Resource.X11_GlobalCSS}" />
+    <div class="x11_community_wrapper">
+        <header class="x11_community_header">
+            <c:X11Community_Header />
+        </header>
+        
+        <div class="x11_community_body">
+            {!v.body}
+        </div>
+
+        <footer class="x11_community_footer">
+            <c:X11Community_Footer />
+        </footer>
+    </div>
+</aura:component>

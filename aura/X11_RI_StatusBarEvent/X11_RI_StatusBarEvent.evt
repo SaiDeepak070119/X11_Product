@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="iStageIndentifier" type="Integer" />
+    <aura:attribute name="iAlreadySelected" type="Integer" />
+</aura:event>

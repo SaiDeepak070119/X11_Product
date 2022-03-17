@@ -1,0 +1,48 @@
+<!--********************************************************************************************
+ * NAME         :  X11_RI_Details_Dropdown
+ * DESCRIPTION  :  This is a part of Detail page (Dropdown).
+ *
+ * @AUTHOR Samidha
+ * @DATE   28 April 2019
+ *
+ * MODIFICATION LOG:
+
+ * DATE        		DESCRIPTION
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ * 28 April 2019 	Initial Creation
+
+ * Parent component: X11_RI_Details
+************************************************************************************************-->
+<aura:component >
+    <aura:attribute name="value" type="List" default=""/>
+    <aura:attribute name="detailsQuestion" type="String" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="detailsAnswer" type="String" default="" description="Defines the answer of the question"/>
+    <aura:attribute name="sSearchValue" type = "String" default = ""/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Option 1', 'value': 'option1'},
+                                                        {'label': 'Option 2', 'value': 'option2'},
+                                                        ]"/>
+    <aura:attribute name="optionsCopy" type="List" default="[]" /> 
+    <aura:attribute name="showCancelIcon" type="Boolean" default="false" />
+    <aura:attribute name="showDropDownIcon" type="Boolean" default="true" />
+    <aura:attribute name="isInvalid" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="errorMSG" type="String" default="" description="shows the error"/>
+    <aura:registerEvent name="X11_RI_Details_QAEvent" type="c:X11_RI_Details_QAEvent"/>
+    <aura:attribute name="isRequired" type="Boolean" default="false" description="if questions is mandatory this will be true"/>
+    <div class="details-comp-wrapper">
+        <div class="question-text">
+            <span style="color: rgb(194, 57, 52);">* </span>{!v.detailsQuestion}
+        </div>
+        <lightning:select value="{!v.detailsAnswer}" name="sort-by" variant="label-hidden"
+                          label="Options" required="true" class="drop-down" onchange="{!c.continueClick}">
+            
+            <aura:if isTrue="{!v.options.length != 0}">
+                <option value="">--None--</option>
+                <aura:iteration items="{!v.options}" var="option">
+                    <option text="{!option.label}" value="{!option.value}"></option>
+                </aura:iteration>
+            </aura:if>
+           
+        </lightning:select>
+    </div>
+</aura:component>

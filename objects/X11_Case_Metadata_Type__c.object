@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Available_for_Portal_User__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Available for Portal User</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Case_Configuration_Link_Field__c</fullName>
+        <description>USed for Data migration</description>
+        <externalId>true</externalId>
+        <label>Case Configuration Link Field</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_Priority__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Priority</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                    <label>High</label>
+                </value>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+                <value>
+                    <fullName>Medium</fullName>
+                    <default>false</default>
+                    <label>Medium</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Record Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Street</fullName>
+                    <default>false</default>
+                    <label>Street</label>
+                </value>
+                <value>
+                    <fullName>Parking</fullName>
+                    <default>false</default>
+                    <label>Parking</label>
+                </value>
+                <value>
+                    <fullName>Public Records Request</fullName>
+                    <default>false</default>
+                    <label>Public Records Request</label>
+                </value>
+                <value>
+                    <fullName>Non-Stormwater Discharges</fullName>
+                    <default>false</default>
+                    <label>Non-Stormwater Discharges</label>
+                </value>
+                <value>
+                    <fullName>Buoys and Nav Aids</fullName>
+                    <default>false</default>
+                    <label>Buoys and Nav Aids</label>
+                </value>
+                <value>
+                    <fullName>Dead Animal</fullName>
+                    <default>false</default>
+                    <label>Dead Animal</label>
+                </value>
+                <value>
+                    <fullName>Sidewalks</fullName>
+                    <default>false</default>
+                    <label>Sidewalks</label>
+                </value>
+                <value>
+                    <fullName>Pier</fullName>
+                    <default>false</default>
+                    <label>Pier</label>
+                </value>
+                <value>
+                    <fullName>Graffiti</fullName>
+                    <default>false</default>
+                    <label>Graffiti</label>
+                </value>
+                <value>
+                    <fullName>Broken Parking Meter</fullName>
+                    <default>false</default>
+                    <label>Broken Parking Meter</label>
+                </value>
+                <value>
+                    <fullName>Floating Debris</fullName>
+                    <default>false</default>
+                    <label>Floating Debris</label>
+                </value>
+                <value>
+                    <fullName>Irrigation</fullName>
+                    <default>false</default>
+                    <label>Irrigation</label>
+                </value>
+                <value>
+                    <fullName>PRA Request</fullName>
+                    <default>false</default>
+                    <label>PRA Request</label>
+                </value>
+                <value>
+                    <fullName>Storm Damage</fullName>
+                    <default>false</default>
+                    <label>Storm Damage</label>
+                </value>
+                <value>
+                    <fullName>Street Lights</fullName>
+                    <default>false</default>
+                    <label>Street Lights</label>
+                </value>
+                <value>
+                    <fullName>Vegetation</fullName>
+                    <default>false</default>
+                    <label>Vegetation</label>
+                </value>
+                <value>
+                    <fullName>Facilities and Equipment</fullName>
+                    <default>false</default>
+                    <label>Facilities and Equipment</label>
+                </value>
+                <value>
+                    <fullName>Traffic Lights Out</fullName>
+                    <default>false</default>
+                    <label>Traffic Lights Out</label>
+                </value>
+                <value>
+                    <fullName>Illegal Dumping</fullName>
+                    <default>false</default>
+                    <label>Illegal Dumping</label>
+                </value>
+                <value>
+                    <fullName>Homeless Encampment</fullName>
+                    <default>false</default>
+                    <label>Homeless Encampment</label>
+                </value>
+                <value>
+                    <fullName>Pothole</fullName>
+                    <default>false</default>
+                    <label>Pothole</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_Required_Fields__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Required Fields</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Case_Subtypes__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Sub-types</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Case_UX_Type__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Lights Out</fullName>
+                    <default>false</default>
+                    <label>Lights Out</label>
+                </value>
+                <value>
+                    <fullName>Material Type {Other}</fullName>
+                    <default>false</default>
+                    <label>Material Type {Other}</label>
+                </value>
+                <value>
+                    <fullName>Material Type {Hazmat}</fullName>
+                    <default>false</default>
+                    <label>Material Type {Hazmat}</label>
+                </value>
+                <value>
+                    <fullName>Branch Down</fullName>
+                    <default>false</default>
+                    <label>Branch Down</label>
+                </value>
+                <value>
+                    <fullName>Obscuring Signage/Signals</fullName>
+                    <default>false</default>
+                    <label>Obscuring Signage/Signals</label>
+                </value>
+                <value>
+                    <fullName>Unstable</fullName>
+                    <default>false</default>
+                    <label>Unstable</label>
+                </value>
+                <value>
+                    <fullName>Cutting Boards</fullName>
+                    <default>false</default>
+                    <label>Cutting Boards</label>
+                </value>
+                <value>
+                    <fullName>Pier Planks</fullName>
+                    <default>false</default>
+                    <label>Pier Planks</label>
+                </value>
+                <value>
+                    <fullName>Railing/Other Structural Issue</fullName>
+                    <default>false</default>
+                    <label>Railing/Other Structural Issue</label>
+                </value>
+                <value>
+                    <fullName>Wildlife Excrement</fullName>
+                    <default>false</default>
+                    <label>Wildlife Excrement</label>
+                </value>
+                <value>
+                    <fullName>Benches/Tables</fullName>
+                    <default>false</default>
+                    <label>Benches/Tables</label>
+                </value>
+                <value>
+                    <fullName>Drinking fountains</fullName>
+                    <default>false</default>
+                    <label>Drinking fountains</label>
+                </value>
+                <value>
+                    <fullName>Sports area</fullName>
+                    <default>false</default>
+                    <label>Sports area</label>
+                </value>
+                <value>
+                    <fullName>Playground</fullName>
+                    <default>false</default>
+                    <label>Playground</label>
+                </value>
+                <value>
+                    <fullName>Restrooms</fullName>
+                    <default>false</default>
+                    <label>Restrooms</label>
+                </value>
+                <value>
+                    <fullName>Broken Sprinkler</fullName>
+                    <default>false</default>
+                    <label>Broken Sprinkler</label>
+                </value>
+                <value>
+                    <fullName>Leak/Over Irrigation</fullName>
+                    <default>false</default>
+                    <label>Leak/Over Irrigation</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Homeless Encampment</fullName>
+                    <default>false</default>
+                    <label>Homeless Encampment</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Homeless Encampment</controllingFieldValue>
+                <valueName>Homeless Encampment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Illegal Dumping and Litter</controllingFieldValue>
+                <valueName>Material Type {Other}</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Illegal Dumping and Litter</controllingFieldValue>
+                <valueName>Material Type {Hazmat}</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Facilities and Equipment</controllingFieldValue>
+                <valueName>Benches/Tables</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Facilities and Equipment</controllingFieldValue>
+                <valueName>Drinking fountains</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Facilities and Equipment</controllingFieldValue>
+                <valueName>Sports area</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Facilities and Equipment</controllingFieldValue>
+                <valueName>Playground</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Facilities and Equipment</controllingFieldValue>
+                <valueName>Restrooms</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Vegetation</controllingFieldValue>
+                <valueName>Branch Down</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Vegetation</controllingFieldValue>
+                <valueName>Obscuring Signage/Signals</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Vegetation</controllingFieldValue>
+                <valueName>Unstable</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Vegetation</controllingFieldValue>
+                <controllingFieldValue>Irrigation</controllingFieldValue>
+                <controllingFieldValue>Buoys and Navigational Aids</controllingFieldValue>
+                <valueName>Other</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Irrigation</controllingFieldValue>
+                <valueName>Broken Sprinkler</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Irrigation</controllingFieldValue>
+                <valueName>Leak/Over Irrigation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Buoys and Navigational Aids</controllingFieldValue>
+                <valueName>Lights Out</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pier</controllingFieldValue>
+                <valueName>Cutting Boards</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pier</controllingFieldValue>
+                <valueName>Pier Planks</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pier</controllingFieldValue>
+                <valueName>Railing/Other Structural Issue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Pier</controllingFieldValue>
+                <valueName>Wildlife Excrement</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Graffiti</fullName>
+                    <default>false</default>
+                    <label>Graffiti</label>
+                </value>
+                <value>
+                    <fullName>Potholes</fullName>
+                    <default>false</default>
+                    <label>Potholes</label>
+                </value>
+                <value>
+                    <fullName>Broken Parking Meter</fullName>
+                    <default>false</default>
+                    <label>Broken Parking Meter</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Public Records Request</fullName>
+                    <default>false</default>
+                    <label>Public Records Request</label>
+                </value>
+                <value>
+                    <fullName>Dead Animal</fullName>
+                    <default>false</default>
+                    <label>Dead Animal</label>
+                </value>
+                <value>
+                    <fullName>Vegetation</fullName>
+                    <default>false</default>
+                    <label>Vegetation</label>
+                </value>
+                <value>
+                    <fullName>Irrigation</fullName>
+                    <default>false</default>
+                    <label>Irrigation</label>
+                </value>
+                <value>
+                    <fullName>Floating Debris</fullName>
+                    <default>false</default>
+                    <label>Floating Debris</label>
+                </value>
+                <value>
+                    <fullName>Street Lights</fullName>
+                    <default>false</default>
+                    <label>Street Lights</label>
+                </value>
+                <value>
+                    <fullName>Paths and Walkways</fullName>
+                    <default>false</default>
+                    <label>Paths and Walkways</label>
+                </value>
+                <value>
+                    <fullName>Buoys and Navigational Aids</fullName>
+                    <default>false</default>
+                    <label>Buoys and Navigational Aids</label>
+                </value>
+                <value>
+                    <fullName>Pier</fullName>
+                    <default>false</default>
+                    <label>Pier</label>
+                </value>
+                <value>
+                    <fullName>Illegal Discharge</fullName>
+                    <default>false</default>
+                    <label>Illegal Discharge</label>
+                </value>
+                <value>
+                    <fullName>Oil Spills/Slicks</fullName>
+                    <default>false</default>
+                    <label>Oil Spills/Slicks</label>
+                </value>
+                <value>
+                    <fullName>Sewage</fullName>
+                    <default>false</default>
+                    <label>Sewage</label>
+                </value>
+                <value>
+                    <fullName>Illegal Maintenance Activity</fullName>
+                    <default>false</default>
+                    <label>Illegal Maintenance Activity</label>
+                </value>
+                <value>
+                    <fullName>Flooded Storm Drain</fullName>
+                    <default>false</default>
+                    <label>Flooded Storm Drain</label>
+                </value>
+                <value>
+                    <fullName>Wind Damage</fullName>
+                    <default>false</default>
+                    <label>Wind Damage</label>
+                </value>
+                <value>
+                    <fullName>Storm Damage</fullName>
+                    <default>false</default>
+                    <label>Storm Damage</label>
+                </value>
+                <value>
+                    <fullName>General Parking Question</fullName>
+                    <default>false</default>
+                    <label>General Parking Question</label>
+                </value>
+                <value>
+                    <fullName>Other Parking Issues</fullName>
+                    <default>false</default>
+                    <label>Other Parking Issues</label>
+                </value>
+                <value>
+                    <fullName>Non-Stormwater Discharges</fullName>
+                    <default>false</default>
+                    <label>Non-Stormwater Discharges</label>
+                </value>
+                <value>
+                    <fullName>Sidewalks</fullName>
+                    <default>false</default>
+                    <label>Sidewalks</label>
+                </value>
+                <value>
+                    <fullName>Facilities and Equipment</fullName>
+                    <default>false</default>
+                    <label>Facilities and Equipment</label>
+                </value>
+                <value>
+                    <fullName>Traffic Lights Out</fullName>
+                    <default>false</default>
+                    <label>Traffic Lights Out</label>
+                </value>
+                <value>
+                    <fullName>Illegal Dumping and Litter</fullName>
+                    <default>false</default>
+                    <label>Illegal Dumping and Litter</label>
+                </value>
+                <value>
+                    <fullName>Homeless Encampment</fullName>
+                    <default>false</default>
+                    <label>Homeless Encampment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_UX_Category__c</fullName>
+        <externalId>false</externalId>
+        <label>UX Group</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Trash and Maintenance</fullName>
+                    <default>false</default>
+                    <label>Trash and Maintenance</label>
+                </value>
+                <value>
+                    <fullName>Graffiti</fullName>
+                    <default>false</default>
+                    <label>Graffiti</label>
+                </value>
+                <value>
+                    <fullName>Illegal Dumping</fullName>
+                    <default>false</default>
+                    <label>Illegal Dumping</label>
+                </value>
+                <value>
+                    <fullName>Parking</fullName>
+                    <default>false</default>
+                    <label>Parking</label>
+                </value>
+                <value>
+                    <fullName>Private Property, Buildings &amp; Construction</fullName>
+                    <default>false</default>
+                    <label>Private Property, Buildings &amp; Construction</label>
+                </value>
+                <value>
+                    <fullName>Trash Collection, Recycling &amp; Graffiti</fullName>
+                    <default>false</default>
+                    <label>Trash Collection, Recycling &amp; Graffiti</label>
+                </value>
+                <value>
+                    <fullName>Streets, Sidewalks &amp; Lights</fullName>
+                    <default>false</default>
+                    <label>Streets, Sidewalks, and Lights</label>
+                </value>
+                <value>
+                    <fullName>Trees &amp; Vegetation</fullName>
+                    <default>false</default>
+                    <label>Trees &amp; Vegetation</label>
+                </value>
+                <value>
+                    <fullName>Water, Sewer &amp; Drains</fullName>
+                    <default>false</default>
+                    <label>Water, Sewer &amp; Drains</label>
+                </value>
+                <value>
+                    <fullName>Passport Services</fullName>
+                    <default>false</default>
+                    <label>Passport Services</label>
+                </value>
+                <value>
+                    <fullName>Public Records Request</fullName>
+                    <default>false</default>
+                    <label>Public Records Request</label>
+                </value>
+                <value>
+                    <fullName>Pier and Bay</fullName>
+                    <default>false</default>
+                    <label>Pier and Bay</label>
+                </value>
+                <value>
+                    <fullName>Environmental</fullName>
+                    <default>false</default>
+                    <label>Environmental</label>
+                </value>
+                <value>
+                    <fullName>Storm Damage</fullName>
+                    <default>false</default>
+                    <label>Storm Damage</label>
+                </value>
+                <value>
+                    <fullName>Facilities and Equipment</fullName>
+                    <default>false</default>
+                    <label>Facilities and Equipment</label>
+                </value>
+                <value>
+                    <fullName>Non-Stormwater Discharges</fullName>
+                    <default>false</default>
+                    <label>Non-Stormwater Discharges</label>
+                </value>
+                <value>
+                    <fullName>Traffic Lights Out</fullName>
+                    <default>false</default>
+                    <label>Traffic Lights Out</label>
+                </value>
+                <value>
+                    <fullName>Homeless Encampment</fullName>
+                    <default>false</default>
+                    <label>Homeless Encampment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_UX_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>UX Description</label>
+        <length>500</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Case_UX_Estimation__c</fullName>
+        <externalId>false</externalId>
+        <label>Estimated Resolution Time</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_UX_Popular_Types__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Popular Case Type?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Case_UX_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Case UX Type</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Car driving by a pothole on the street</fullName>
+                    <default>false</default>
+                    <label>Car driving by a pothole on the street</label>
+                </value>
+                <value>
+                    <fullName>Oversized Vehicles</fullName>
+                    <default>false</default>
+                    <label>Oversized Vehicles</label>
+                </value>
+                <value>
+                    <fullName>Zone Issue</fullName>
+                    <default>false</default>
+                    <label>Zone Issue</label>
+                </value>
+                <value>
+                    <fullName>Quality of Life</fullName>
+                    <default>false</default>
+                    <label>Quality of Life</label>
+                </value>
+                <value>
+                    <fullName>Illegal Use or Activity</fullName>
+                    <default>false</default>
+                    <label>Illegal Use or Activity</label>
+                </value>
+                <value>
+                    <fullName>Safety Risk</fullName>
+                    <default>false</default>
+                    <label>Safety Risk</label>
+                </value>
+                <value>
+                    <fullName>Illegal Construction</fullName>
+                    <default>false</default>
+                    <label>Illegal Construction</label>
+                </value>
+                <value>
+                    <fullName>Trash Collection Services</fullName>
+                    <default>false</default>
+                    <label>Trash Collection Services</label>
+                </value>
+                <value>
+                    <fullName>Appointments</fullName>
+                    <default>false</default>
+                    <label>Appointments</label>
+                </value>
+                <value>
+                    <fullName>Report</fullName>
+                    <default>false</default>
+                    <label>Report</label>
+                </value>
+                <value>
+                    <fullName>Curb</fullName>
+                    <default>false</default>
+                    <label>Curb</label>
+                </value>
+                <value>
+                    <fullName>Pothole</fullName>
+                    <default>false</default>
+                    <label>Pothole</label>
+                </value>
+                <value>
+                    <fullName>Sidewalk Repair</fullName>
+                    <default>false</default>
+                    <label>Sidewalk Repair</label>
+                </value>
+                <value>
+                    <fullName>Street Light</fullName>
+                    <default>false</default>
+                    <label>Street Light</label>
+                </value>
+                <value>
+                    <fullName>Traffic Sign</fullName>
+                    <default>false</default>
+                    <label>Traffic Sign</label>
+                </value>
+                <value>
+                    <fullName>Traffic Signal</fullName>
+                    <default>false</default>
+                    <label>Traffic Signal</label>
+                </value>
+                <value>
+                    <fullName>Damaged Guardrail</fullName>
+                    <default>false</default>
+                    <label>Damaged Guardrail</label>
+                </value>
+                <value>
+                    <fullName>Faded Striping</fullName>
+                    <default>false</default>
+                    <label>Faded Striping</label>
+                </value>
+                <value>
+                    <fullName>Street Sweeping</fullName>
+                    <default>false</default>
+                    <label>Street Sweeping</label>
+                </value>
+                <value>
+                    <fullName>Other street, sidewalk, and light related issue</fullName>
+                    <default>false</default>
+                    <label>Other street, sidewalk, and light related issue</label>
+                </value>
+                <value>
+                    <fullName>Tree Maintenance</fullName>
+                    <default>false</default>
+                    <label>Tree Maintenance</label>
+                </value>
+                <value>
+                    <fullName>Storm Drain</fullName>
+                    <default>false</default>
+                    <label>Storm Drain</label>
+                </value>
+                <value>
+                    <fullName>Street Flooded</fullName>
+                    <default>false</default>
+                    <label>Street Flooded</label>
+                </value>
+                <value>
+                    <fullName>Illegal Discharge</fullName>
+                    <default>false</default>
+                    <label>Illegal Discharge</label>
+                </value>
+                <value>
+                    <fullName>Over Irrigation</fullName>
+                    <default>false</default>
+                    <label>Over Irrigation</label>
+                </value>
+                <value>
+                    <fullName>Schedule an Appointment for a Passport</fullName>
+                    <default>false</default>
+                    <label>Schedule an Appointment for a Passport</label>
+                </value>
+                <value>
+                    <fullName>Graffiti</fullName>
+                    <default>false</default>
+                    <label>Graffiti</label>
+                </value>
+                <value>
+                    <fullName>72 Hour Violation</fullName>
+                    <default>false</default>
+                    <label>72 Hour Violation</label>
+                </value>
+                <value>
+                    <fullName>PRA</fullName>
+                    <default>false</default>
+                    <label>PRA</label>
+                </value>
+                <value>
+                    <fullName>Public Records Request</fullName>
+                    <default>false</default>
+                    <label>Public Records Request</label>
+                </value>
+                <value>
+                    <fullName>Illegal Dumping and Litter</fullName>
+                    <default>false</default>
+                    <label>Illegal Dumping and Litter</label>
+                </value>
+                <value>
+                    <fullName>Broken Parking Meter</fullName>
+                    <default>false</default>
+                    <label>Broken Parking Meter</label>
+                </value>
+                <value>
+                    <fullName>Facilities and Equipment</fullName>
+                    <default>false</default>
+                    <label>Facilities and Equipment</label>
+                </value>
+                <value>
+                    <fullName>Dead Animal</fullName>
+                    <default>false</default>
+                    <label>Dead Animal</label>
+                </value>
+                <value>
+                    <fullName>Vegetation</fullName>
+                    <default>false</default>
+                    <label>Vegetation</label>
+                </value>
+                <value>
+                    <fullName>Irrigation</fullName>
+                    <default>false</default>
+                    <label>Irrigation</label>
+                </value>
+                <value>
+                    <fullName>Floating Debris</fullName>
+                    <default>false</default>
+                    <label>Floating Debris</label>
+                </value>
+                <value>
+                    <fullName>Street Lights</fullName>
+                    <default>false</default>
+                    <label>Street Lights</label>
+                </value>
+                <value>
+                    <fullName>Paths and Walkways</fullName>
+                    <default>false</default>
+                    <label>Paths and Walkways</label>
+                </value>
+                <value>
+                    <fullName>Potholes</fullName>
+                    <default>false</default>
+                    <label>Potholes</label>
+                </value>
+                <value>
+                    <fullName>Buoys and Navigational Aids</fullName>
+                    <default>false</default>
+                    <label>Buoys and Navigational Aids</label>
+                </value>
+                <value>
+                    <fullName>Pier</fullName>
+                    <default>false</default>
+                    <label>Pier</label>
+                </value>
+                <value>
+                    <fullName>Oil Spills/Slicks</fullName>
+                    <default>false</default>
+                    <label>Oil Spills/Slicks</label>
+                </value>
+                <value>
+                    <fullName>Sewage</fullName>
+                    <default>false</default>
+                    <label>Sewage</label>
+                </value>
+                <value>
+                    <fullName>Illegal Maintenance Activity</fullName>
+                    <default>false</default>
+                    <label>Illegal Maintenance Activity</label>
+                </value>
+                <value>
+                    <fullName>Flooded Storm Drain</fullName>
+                    <default>false</default>
+                    <label>Flooded Storm Drain</label>
+                </value>
+                <value>
+                    <fullName>Wind Damage</fullName>
+                    <default>false</default>
+                    <label>Wind Damage</label>
+                </value>
+                <value>
+                    <fullName>Storm Damage</fullName>
+                    <default>false</default>
+                    <label>Storm Damage</label>
+                </value>
+                <value>
+                    <fullName>General Parking Question</fullName>
+                    <default>false</default>
+                    <label>General Parking Question</label>
+                </value>
+                <value>
+                    <fullName>Other Parking Issues</fullName>
+                    <default>false</default>
+                    <label>Other Parking Issues</label>
+                </value>
+                <value>
+                    <fullName>Non-Stormwater Discharges</fullName>
+                    <default>false</default>
+                    <label>Non-Stormwater Discharges</label>
+                </value>
+                <value>
+                    <fullName>Sidewalks</fullName>
+                    <default>false</default>
+                    <label>Sidewalks</label>
+                </value>
+                <value>
+                    <fullName>Traffic Lights Out</fullName>
+                    <default>false</default>
+                    <label>Traffic Lights Out</label>
+                </value>
+                <value>
+                    <fullName>Homeless Encampment</fullName>
+                    <default>false</default>
+                    <label>Homeless Encampment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Condition_Field_Value__c</fullName>
+        <externalId>false</externalId>
+        <label>Condition Field Value</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Condition_Field__c</fullName>
+        <externalId>false</externalId>
+        <label>Condition Field</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Condition_Operator__c</fullName>
+        <externalId>false</externalId>
+        <label>Condition Operator</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>=</fullName>
+                    <default>false</default>
+                    <label>=</label>
+                </value>
+                <value>
+                    <fullName>&lt;&gt;</fullName>
+                    <default>false</default>
+                    <label>&lt;&gt;</label>
+                </value>
+                <value>
+                    <fullName>In</fullName>
+                    <default>false</default>
+                    <label>In</label>
+                </value>
+                <value>
+                    <fullName>Not In</fullName>
+                    <default>false</default>
+                    <label>Not In</label>
+                </value>
+                <value>
+                    <fullName>Like</fullName>
+                    <default>false</default>
+                    <label>Like</label>
+                </value>
+                <value>
+                    <fullName>Not Like</fullName>
+                    <default>false</default>
+                    <label>Not Like</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Display_Action_Taken__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Display Action Taken</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Display_on_Web__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Display on Web?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Duplicate_Radious_Miles__c</fullName>
+        <externalId>false</externalId>
+        <formula>X11_Radius_for_Duplicate_Check__c/5280</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Duplicate Radious Miles</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>18</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_days_orange__c</fullName>
+        <externalId>false</externalId>
+        <label>No of days orange</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_days_red__c</fullName>
+        <externalId>false</externalId>
+        <label>No of days red</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Picture_Path__c</fullName>
+        <externalId>false</externalId>
+        <label>Picture Path</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Picture__c</fullName>
+        <externalId>false</externalId>
+        <formula>IMAGE(Picture_Path__c, &quot;Product Image&quot;, 100, 100)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Picture</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sequence_on_portal__c</fullName>
+        <externalId>false</externalId>
+        <label>Sequence on portal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X11_Anonymous_Reporting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to control whether anonymous reporting will be allowed for a particular type of case.</description>
+        <externalId>false</externalId>
+        <label>Anonymous Reporting</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>X11_Case_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Escalated</fullName>
+                    <default>false</default>
+                    <label>Escalated</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+                <value>
+                    <fullName>Closed - Referred</fullName>
+                    <default>false</default>
+                    <label>Closed - Referred</label>
+                </value>
+                <value>
+                    <fullName>Pending Work</fullName>
+                    <default>false</default>
+                    <label>Pending Work</label>
+                </value>
+                <value>
+                    <fullName>Duplicate</fullName>
+                    <default>false</default>
+                    <label>Duplicate</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>X11_Field_Set_To_Display__c</fullName>
+        <description>This field is used to store the value of the field set which will be displayed for a particular type of case.</description>
+        <externalId>false</externalId>
+        <label>Field Set To Display</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X11_Radius_for_Duplicate_Check__c</fullName>
+        <externalId>false</externalId>
+        <label>Radius for Duplicate Check</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Case Configuration</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Case_Record_Type__c</columns>
+        <columns>NAME</columns>
+        <columns>Display_on_Web__c</columns>
+        <columns>Available_for_Portal_User__c</columns>
+        <columns>Sequence_on_portal__c</columns>
+        <columns>X11_Anonymous_Reporting__c</columns>
+        <columns>Case_UX_Category__c</columns>
+        <columns>Case_UX_Type__c</columns>
+        <columns>Case_UX_Description__c</columns>
+        <columns>Case_UX_Estimation__c</columns>
+        <columns>Case_UX_Popular_Types__c</columns>
+        <columns>X11_Radius_for_Duplicate_Check__c</columns>
+        <columns>Duplicate_Radious_Miles__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All1</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CM-{0000}</displayFormat>
+        <label>Case Metadata Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Case Configurations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

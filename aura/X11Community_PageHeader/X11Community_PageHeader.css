@@ -1,0 +1,35 @@
+.THIS.x11_page_header {
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.THIS.x11_page_header .gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.THIS.x11_page_header .slds-grid {
+    width: 100%;
+    z-index: 2;
+}
+.THIS.x11_page_header .x11_page_header_line_1  {
+    font-size: 30px;
+    color: #fff;
+}
+/*.THIS.x11_page_header .x11_page_header_line_2  {
+    font-size: 50px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-weight: 600;
+}*/
+
+@media only screen and (max-width: 767px) {
+    .THIS.x11_page_header .x11_page_header_line_1  {
+        font-size: 22px;
+    }
+    .THIS.x11_page_header .x11_page_header_line_2  {
+        font-size: 30px;
+    }
+}

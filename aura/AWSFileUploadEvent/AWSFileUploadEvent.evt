@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="claimId" type="String" />
+    <aura:attribute name="baseURL" type="String[]" />
+</aura:event>

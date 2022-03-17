@@ -1,0 +1,171 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" 
+                controller="X11_ViewServiceRequestsController"
+                extends="c:X11_BaseComponent">
+    <ltng:require scripts="{!$Resource.X11_aws_sdk}"/>
+    <aura:attribute name="viewAllRequests" type="Boolean" default="true" />
+    <aura:attribute name="statusSearchCriterias" type="List" />
+    <aura:attribute name="dateSearchCriterias" type="List" />
+    <aura:attribute name="requestTypeSearchCriterias" type="List" />
+    <aura:attribute name="results" type="List" />
+    <aura:attribute name="numberOfRecords" type="Integer" default="-1" />
+
+    <aura:attribute name="selectedDateFilterValue" type="String" default="" />
+    <aura:attribute name="selectedStatusFilterValue" type="String" default="" />
+    <aura:attribute name="selectedRequestTypeFilterValue" type="String" default="" />
+    
+    <aura:attribute name="showCustomDatePicker" type="Boolean" default="false" />
+    <aura:attribute name="todaysDate" type="Date" />
+    <aura:attribute name="customStartDate" type="Date" />
+    <aura:attribute name="customEndDate" type="Date" />
+    <aura:attribute name="selectedRequestTypeCategory" type="String" default="" />
+    <aura:attribute name="amazonsetting" type="Map"/>
+    
+    <aura:attribute name="selectedServiceRequest" type="Object" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="cardSelect" event="c:X11_E_ServiceRequestCardEvent" action="{!c.cardSelectHandler}" />
+    
+    <c:X11Community_PageHeader headerLine2="{!$Label.c.X11_ServiceRequest}" />
+    
+    <aura:if isTrue="{!!v.selectedServiceRequest}">
+
+        <div class="slds-grid slds-grid_align-center slds-p-vertical_xx-large">
+            <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+                <div class="x11_section_header">
+                    <aura:if isTrue="{!v.viewAllRequests}">
+                        {!$Label.c.X11_Menu_All_Service_Requests}
+                        <aura:set attribute="else">
+                            {!$Label.c.X11_Menu_My_Requests}    
+                        </aura:set>
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slds-grid slds-wrap slds-grid_align-center slds-m-bottom_xx-large">
+            <div class="slds-col slds-size_11-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 slds-m-bottom_xx-large">
+                
+                <!-- Date Filter -->
+                <lightning:buttonMenu aura:id="dateSearchCriteriaButtonMenu" label="Date" alternativeText="Show Date Filter"
+                                    class="searchCriteraButton slds-m-bottom_medium"
+                                    onselect="{!c.handleDateSearchCriteria}">
+                    <aura:iteration items="{!v.dateSearchCriterias}" var="dateSearchCriteria">
+                        <lightning:menuItem aura:id="dateSearchCriterias" label="{!dateSearchCriteria.label}"
+                                            checked="false" value="{!dateSearchCriteria.value}" />
+                    </aura:iteration>
+                    <lightning:menuItem aura:id="dateSearchCriterias" label="Custom"
+                                        value="Custom" checked="false" />
+                    <aura:if isTrue="{!v.showCustomDatePicker}">
+                        <lightning:layout class="slds-p-around_small date-picker-container"
+                                        horizontalAlign="left" multipleRows="true">
+                            <lightning:layoutItem class="startDate" size="12" smallDeviceSize="12"
+                                                mediumDeviceSize="12"  largeDeviceSize="12" flexibility="grow">
+                                <lightning:input aura:id="startDate" type="date" label="Start Date"
+                                                class="field" value="{!v.customStartDate}"
+                                                max="{!v.todaysDate}" onchange="{!c.setCustomDateSearchCriteriaValue}"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem class="endDate" size="12" smallDeviceSize="12"
+                                                mediumDeviceSize="12" largeDeviceSize="12" flexibility="grow">
+                                <lightning:input aura:id="endDate" type="date" label="End Date"
+                                                class="field" value="{!v.customEndDate}"
+                                                max="{!v.todaysDate}" onchange="{!c.setCustomDateSearchCriteriaValue}"/>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </aura:if>
+                    <div class="slds-grid slds-wrap">
+                        <lightning:button variant="brand" class="applyBtn slds-m-around_small"
+                                        disabled="{!v.selectedDateFilterValue == ''}" onclick="{!c.searchCases}">
+                            Apply Filters
+                        </lightning:button>
+                    </div>
+                </lightning:buttonMenu>
+                
+                <!-- Status Filter -->
+                <lightning:buttonMenu aura:id="statusSearchCriteriaButtonMenu" label="Status" alternativeText="Show menu"
+                                    class="searchCriteraButton slds-m-bottom_medium" 
+                                    onselect="{!c.handleStatusSearchCriteria}">
+                    <aura:iteration items="{!v.statusSearchCriterias}" var="statusSearchCriteria">
+                        <lightning:menuItem aura:id="statusSearchCriterias" title="Status"
+                                            label="{!statusSearchCriteria.label}"
+                                            checked="false" value="{!statusSearchCriteria.value}"/>
+                    </aura:iteration>
+                    <div class="slds-grid slds-wrap">
+                        <lightning:button variant="brand"
+                                        class="applyBtn slds-m-around_small"
+                                        disabled="{!v.selectedStatusFilterValue == ''}" onclick="{!c.searchCases}">
+                            Apply Filters
+                        </lightning:button>
+                    </div>
+                </lightning:buttonMenu>
+                
+                <!-- Request Type Filter -->
+                <lightning:buttonMenu aura:id="requestTypeSearchCriteriaButtonMenu" label="Request Type" alternativeText="Show menu"
+                                    class="searchCriteraButton slds-m-bottom_medium"
+                                    onselect="{!c.handleRequestTypeSearchCriteria}">
+                                        
+                    <aura:iteration items="{!v.requestTypeSearchCriterias}" var="requestTypeSearchCriteria">
+                        <aura:if isTrue="{!v.selectedRequestTypeCategory == ''}">
+                            <div class="requestTypeCategories">
+                                <lightning:button label="{!requestTypeSearchCriteria.label}" value="{!requestTypeSearchCriteria.value}"
+                                                onclick="{!c.setSelectedRequestTypeCategory}" />
+                            </div>
+                        </aura:if>
+
+                        <aura:if isTrue="{!v.selectedRequestTypeCategory == requestTypeSearchCriteria.value}">
+                            <lightning:button class="requestTypeFilterBackToCategoryButton" variant="base"
+                                            label="‹ Back to Categories" value=""
+                                            onclick="{!c.setSelectedRequestTypeCategory}" />
+                                                
+                            <div class="requestTypeCategoryItems">
+                                <aura:iteration items="{!requestTypeSearchCriteria.childFilters}" var="childCriteria">
+                                    <lightning:menuItem aura:id="requestTypeSearchCriterias" label="{!childCriteria.label}"
+                                                        checked="false" value="{!childCriteria.value}" />
+                                </aura:iteration>
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                    <aura:if isTrue="{!v.selectedRequestTypeCategory != ''}">
+                        <div class="slds-grid slds-wrap">
+                            <lightning:button variant="brand"
+                                            class="applyBtn slds-m-around_small"
+                                            disabled="{!v.selectedRequestTypeFilterValue == ''}" onclick="{!c.searchCases}">
+                                Apply Filters
+                            </lightning:button>
+                        </div>
+                    </aura:if>
+                </lightning:buttonMenu>
+
+                <!-- Clear Filter -->
+                <lightning:button variant="base" iconName="utility:close" class="clearSearchFilterButton" onclick="{!c.clearSearchFilter}">
+                    CLEAR FILTERS
+                </lightning:button>
+            </div>
+            <div class="slds-col slds-size_11-of-12 slds-medium-size_9-of-12 slds-large-size_8-of-12 serviceRequestList">
+                
+                <aura:if isTrue="{!v.numberOfRecords == 0}">
+                    <div class="noRecordsMessage slds-m-vertical_xx-large">
+                        <lightning:icon class="icon" iconName="utility:sentiment_negative" alternativeText="Error!" variant="error" size="large"/>
+                        <p class="line1"><b>Sorry, we could not find any requests.</b></p>
+                        <p class="line2">Please select different criteria and try again.</p>
+                    </div>
+                </aura:if>
+
+                <aura:if isTrue="{!!empty(v.results)}">
+                    <c:X11_ServiceRequestCardListWithPagination serviceRequests="{!v.results}" amazonsetting="{!v.amazonsetting}"/>
+                </aura:if>
+            </div>
+        </div>
+        
+    </aura:if>
+
+    <aura:if isTrue="{!v.selectedServiceRequest}">
+        <div class="slds-grid slds-grid_align-center slds-p-vertical_xx-large">
+            <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+                <c:X11_ServiceRequestCard serviceRequest="{!v.selectedServiceRequest}" amazonsetting="{!v.amazonsetting}"/>
+                <lightning:button variant="brand" label="Back" iconName="utility:back" class="slds-m-vertical_x-large"
+                                   onclick="{!c.showServiceRequestListHandler}" />
+            </div>
+        </div>
+        
+    </aura:if>
+</aura:component>

@@ -1,0 +1,34 @@
+<aura:component>
+	
+    <aura:attribute name="backgroundImage" type="String" 
+                    default="{!$Resource.X11_CommunityHeader}" />
+    <aura:attribute name="headerLine1" type="String" default="" />
+    <aura:attribute name="headerLine2" type="String" default="" />
+    <aura:attribute name="backgroundOverlay" type="Boolean" default="true" />
+    
+    <div class="x11_page_header slds-align_absolute-center" 
+         style="{!'background-image: url(' + v.backgroundImage + ')'}">
+        
+        <aura:if isTrue="{!v.backgroundOverlay}">
+            <div class="gradient" 
+                 style="{!'background-image: url(' + $Resource.X11Community_PageHeaderImages + '/dott.png' + ')'}">
+            </div>
+        </aura:if>
+        
+        <div class="slds-grid slds-grid_align-center">
+        	<div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+                <aura:if isTrue="{!!empty(v.headerLine1)}">
+                    <div class="x11_page_header_line_1">
+                        {!v.headerLine1}
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!!empty(v.headerLine2)}">
+                    <div class="x11_page_header_line_2">
+                        {!v.headerLine2}
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

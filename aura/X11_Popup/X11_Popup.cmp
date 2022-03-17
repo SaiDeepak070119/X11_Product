@@ -1,0 +1,27 @@
+<aura:component extensible="true">
+    <aura:attribute name="showModalFlag" type="Boolean" default="false" />
+    <aura:attribute name="showCloseButton" type="Boolean" default="true" />
+    <aura:attribute name="title" type="String" />
+    
+    <aura:method name="showModal" action="{!c.showModal}" />
+    <aura:method name="closeModal" action="{!c.closeModal}" />
+    
+    <aura:if isTrue="{!v.showModalFlag}">
+        <div class="x11_modal_backdrop"></div>
+        <div class="x11_modal_popup" tabindex="-1">
+            <div class="x11_modal_content">
+                <aura:if isTrue="{!v.showCloseButton}">
+                    <div class="close" onclick="{!c.closeModal}">
+                        <span></span>
+                    </div>                    
+                </aura:if>
+                <aura:if isTrue="{!!empty(v.title)}">
+                    <div class="title">
+                        {!v.title}
+                    </div>                    
+                </aura:if>
+                {!v.body}
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

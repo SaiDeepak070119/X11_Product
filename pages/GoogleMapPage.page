@@ -1,0 +1,352 @@
+<apex:page showHeader="false">
+<html>
+    <head>
+        <apex:slds />
+        <link rel="stylesheet" href="https://developers.google.com/maps/documentation/javascript/demos/demos.css" />
+    </head>
+
+    <body class="slds-scope">
+
+        <div id="pac-inputt-error" style="display:none;color: red;">{!$Label.Map_boundaries_error}</div>
+        <div Id="InvalidAddressId" style="display:none;color:red;">{!$Label.Map_boundaries_error}</div>
+
+        <div class="slds-p-bottom_large">
+            <input id="addressSearch" type="text" name="address" class="slds-input form-text required" 
+                    placeholder="Please enter an address"/>
+        </div>
+
+        <div id="map"></div>
+
+        <script>
+        var lexOrigin = 'https://{!$CurrentPage.parameters.lcHost}';//'{!"https://" + JSENCODE($CurrentPage.parameters.lcHost)}';
+
+            var data;
+            var marker;
+			var loadCount = 0;
+            var address = '';
+            var pageLoaded = false;
+            var postal = '';
+            var country = '';
+            var cityName = '';
+            var streetaddress = '';
+            var streetNum = '';
+            var city = '';
+            var state = '';
+            var boundCheck;
+        	var map;
+            const LOCATION_ORIGIN = Object.freeze({
+                'INIT': 0,
+                'BROWSER': 1,
+                'IMAGE': 2,
+                'MANUAL': 3
+            });
+            const CLIENT_LOCATION_ORIGIN = Object.freeze({
+                '0' : 'INIT',
+                '1' : 'BROWSER',
+                '2' : 'IMAGE',
+                '3' : 'MANUAL'
+            });
+
+            //Send message to LC
+            function sendToLC(message) {
+                if (typeof (lexOrigin) != 'undefined') {
+                    console.log(lexOrigin);
+                    parent.postMessage(message, lexOrigin);
+                }
+            }
+
+            console.log('{!$CurrentPage.URL}');
+            var vfHost = '{!LEFT($CurrentPage.URL,FIND('/',$CurrentPage.URL,9))}';
+            sendToLC({ 'state': 'LOADED', 'vfHost': vfHost });
+
+            window.addEventListener("message", function (event) {
+                data = event.data;
+                /*if(pageLoaded) {
+                    return;
+                }
+
+                pageLoaded = true;
+                data = event.data;*/
+                if (loadCount > 0) {
+                    if(marker && data.mapOptionsCenter){
+                        currentLocationOrigin = newLocationOrigin;
+                        newLocationOrigin = LOCATION_ORIGIN[data.locationOrigin];
+                        if(newLocationOrigin >= currentLocationOrigin){
+                            const position = new google.maps.LatLng(data.mapOptionsCenter.lat, data.mapOptionsCenter.lng);
+                            //map.setCenter(position);
+                            marker.setPosition(data.mapOptionsCenter);
+                            map.panTo(data.mapOptionsCenter);
+                        }
+                    }
+                    return;
+                }
+                
+                loadCount = loadCount + 1;
+
+                if(loadCount == 1 && typeof (event.data.loadGoogleMap) != 'undefined') {
+                    var script = document.createElement("script");
+                    script.src = "https://maps.googleapis.com/maps/api/js?key={!$Label.Google_API_Key}&libraries=places&callback=initMap";
+                    document.getElementsByTagName("head")[0].appendChild(script);
+                }
+            }, false);
+
+            function initMap() {
+                newLocationOrigin = currentLocationOrigin = LOCATION_ORIGIN[data.locationOrigin];
+                function addMarker(feature) {
+                    marker = new google.maps.Marker({
+                        position: feature.position,
+                        map: map,
+                        draggable: true
+                    });
+                }
+                /*var infoWindow = new google.maps.InfoWindow({
+                        content: feature.markerText
+                    });
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+                }*/
+
+                map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 15,
+                    streetViewControl: false,
+                    panControl: false,
+                });
+                map.setCenter(data.mapOptionsCenter);
+
+                //document.getElementById('addressSearch').value = data.addressValue != undefined ? data.addressValue : '';
+                let mapData = data.mapData;
+                for (let i = 0; i < mapData.length; i++) {
+                    //Add marker for each point
+                    let myLatlng = new google.maps.LatLng(mapData[i].lat, mapData[i].lng);
+                    addMarker({ position: myLatlng });
+                }
+                
+                map.addListener('center_changed', (e) => {
+                   	if(newLocationOrigin != LOCATION_ORIGIN['MANUAL']) {
+                        window.setTimeout(() => {
+                            geocoder.geocode({ 'latLng': marker.getPosition() }, (results, status) => {
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    document.getElementById('addressSearch').value = results[0].formatted_address;
+                                    google.maps.geometry.poly.containsLocation(marker.getPosition(), mapHighlight) ? insideBounds() : outsideBounds();
+                                    postal='';
+                                    country='';
+                                    cityName='';
+                                    streetaddress='';
+                                    streetNum='';
+                                    city='';
+                                    state='';
+                                    populateAddress(results[0]);
+                                
+                                    let messageVal = {
+                                        'state': 'ADDRESSCHANGE',
+                                        'vfHost': 'addressChange',
+                                        'address': document.getElementById('addressSearch').value,
+                                        'latLong': marker.getPosition(),
+                                		'locationOrigin': CLIENT_LOCATION_ORIGIN[newLocationOrigin]
+                                    };
+                                    
+                                    if(streetaddress.trim()===''){
+                                        streetaddress = messageVal.address.split(',')[0];
+                                    }
+                                    sendToLC(messageVal);
+                                }
+                           });
+                        }, 3000);
+        			}
+                });
+
+        /*for (var i = 0, j = data.mapData.length; i < j; i++) {
+                    var myLatlng = new google.maps.LatLng(data.mapData[i].lat, data.mapData[i].lng);
+                    addMarker({ position: myLatlng, markerText: data.mapData[i].markerText });
+                }*/
+
+                var script = document.createElement('script');
+                script.src = "{!$Label.Community_URL}{!URLFOR($Resource.leaflet, 'portbounds.js')}";
+                document.getElementsByTagName('head')[0].appendChild(script);
+
+                var latLng1 = [];
+                var mapHighlight = [];
+                var pathval = [];
+
+                window.eqfeed_callback = function (results) {
+                    var newArr = [];
+                    var count = 0;
+                    for (var j = 0; j < results.features[0].geometry.coordinates.length; j++) {
+                        var cordinatesArray = results.features[0].geometry.coordinates[j];
+                        for (var i = 0; i < cordinatesArray.length; i++) {
+                            var cordValsArray = cordinatesArray[i];
+                            var tempArray = [];
+                            for (k = 0; k < cordValsArray.length; k++) {
+                                var actualCoords = cordValsArray[k];
+                                var latLng = new google.maps.LatLng(actualCoords[1], actualCoords[0]);
+                                tempArray.push(latLng);
+                            }
+                            pathval.push(tempArray);
+                        }
+                    }
+                    mapHighlight = (new google.maps.Polygon({
+                        paths: pathval,
+                        strokeColor: "black",
+                        strokeOpacity: 2.0,
+                        strokeWeight: 2,
+                        fillColor: "black",
+                        fillOpacity: 0.0
+                    }));
+                    mapHighlight.setMap(map);
+                }
+
+                /*-------------------Address Search start ------------------ */
+                var geocoder = new google.maps.Geocoder();
+                var input = document.getElementById('addressSearch');
+                var searchBox = new google.maps.places.SearchBox(input);
+
+                searchBox.addListener('places_changed', function () {
+                    currentLocationOrigin = newLocationOrigin;
+                    newLocationOrigin = LOCATION_ORIGIN['MANUAL'];
+                    var place;
+                    var address = document.getElementById('addressSearch').value;
+                    geocoder.geocode({ 'address': address }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            place = results[0];
+                        } else {
+                            place = searchBox.getPlaces()[0];
+                        }
+                        //place = (status == google.maps.GeocoderStatus.OK) ? results[0] : searchBox.getPlaces()[0];
+                        map.setZoom(15);
+                        var address = place.formatted_address;
+                        marker.setPosition(place.geometry.location);
+                        var latLng = marker.getPosition();
+                        document.getElementById("addressSearch").value = address;
+
+                        google.maps.geometry.poly.containsLocation(latLng, mapHighlight) ? insideBounds() : outsideBounds();
+                        postal='';
+                        country='';
+                        cityName='';
+                        streetaddress='';
+                        streetNum='';
+                        city='';
+                        state='';
+                        populateAddress(place);
+						var messageVal1 = {                                
+                            'state': 'ADDRESSCHANGE',
+                            'vfHost': 'addressChange',
+                            'address': document.getElementById('addressSearch').value,
+                            'latLong': latLng,
+                            'postal': postal,
+                            'country': country,
+                            'cityName': cityName,
+                            'streetaddress': streetaddress,
+                            'streetNum': streetNum,
+                            'city': city,
+                            'stateVal': state,
+                            'boundCheck': boundCheck,
+                            'locationOrigin': CLIENT_LOCATION_ORIGIN[newLocationOrigin]
+                        };
+                        //console.log(messageVal1);
+                        var meesageToSendToLC1 = JSON.parse(JSON.stringify(messageVal1));
+                        //console.log(meesageToSendToLC1);
+                        map.setCenter(place.geometry.location);
+                        marker.setPosition(place.geometry.location);
+                        sendToLC(meesageToSendToLC1);
+                    });
+                });
+
+                /*------------------Set address on marker drag start--------------*/
+                (function (marker, address) {
+                    /*google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent(marker.description);
+                        infoWindow.open(map, marker);
+                    });*/
+
+                    google.maps.event.addListener(marker, "dragend", function (e) {
+                        currentLocationOrigin = newLocationOrigin;
+                        newLocationOrigin = LOCATION_ORIGIN['MANUAL'];
+                        geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                document.getElementById('addressSearch').value = results[0].formatted_address;
+                                google.maps.geometry.poly.containsLocation(e.latLng, mapHighlight) ? insideBounds() : outsideBounds();
+                                populateAddress(results[0]);
+                                
+                                var messageVal = {                                    
+                                    'state': 'ADDRESSCHANGE',
+                                    'vfHost': 'addressChange',
+                                    'address': document.getElementById('addressSearch').value,
+                                    'latLong': e.latLng,
+                                    'postal': postal,
+                                    'country': country,
+                                    'cityName': cityName,
+                                    'streetaddress': streetaddress,
+                                    'streetNum': streetNum,
+                                    'city': city,
+                                    'stateVal': state,
+                                    'boundCheck': boundCheck,
+                                    'locationOrigin': CLIENT_LOCATION_ORIGIN[newLocationOrigin]
+                                };
+                                var meesageToSendToLC = JSON.parse(JSON.stringify(messageVal));
+                                console.log(meesageToSendToLC);
+                                sendToLC(meesageToSendToLC);
+                            }
+                        });
+                    });
+                })(marker, address);
+
+                function insideBounds() {
+                    document.getElementById('InvalidAddressId').style.cssText = "display:none";
+                    document.getElementById('pac-inputt-error').style.cssText = "display:none";
+                    document.getElementById('addressSearch').style.cssText = "";
+                    boundCheck = true;
+                }
+                function outsideBounds() {
+                    document.getElementById('InvalidAddressId').style.cssText = "display:block;color:red";
+                    document.getElementById('pac-inputt-error').style.cssText = "display:none";
+                    document.getElementById('addressSearch').style.cssText = "border: 1px solid red";
+                    boundCheck = false;
+                }
+
+
+                function populateAddress(results) {
+                    console.log('PopulateAddress'+results.address_components);
+                    for (var i = 0; i < results.address_components.length; i++) {
+                        for (var b = 0; b < results.address_components[i].types.length; b++) {
+                            if (results.address_components[i].types[b] == "administrative_area_level_1") {
+                                //this is the object you are looking for
+                                state = results.address_components[i].long_name;
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "locality") {
+                                city = results.address_components[i].long_name;
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "street_number") {
+                                streetNum = results.address_components[i].long_name;
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "route") {
+                                streetaddress = results.address_components[i].long_name;
+
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "administrative_area_level_2") {
+                                cityName = results.address_components[i].long_name;
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "country") {
+                                country = results.address_components[i].long_name;
+                                break;
+                            }
+                            if (results.address_components[i].types[b] == "postal_code") {
+                                postal = results.address_components[i].long_name;
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        </script>
+    </body>
+
+</html>
+</apex:page>

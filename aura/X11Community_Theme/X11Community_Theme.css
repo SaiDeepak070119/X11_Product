@@ -1,0 +1,16 @@
+.THIS {
+	position: relative;
+	z-index: 1;
+	background-color: #fff;
+    min-height: 100vh;
+}
+.THIS .slds-col--padded.comm-layout-column,
+.THIS .slds-col--padded.comm-content-header {
+    padding: 0px;
+}
+/*.THIS .slds-input {
+    height: 35px;
+    font-size: 14px;
+    color: #002d72;
+    border-radius: 0px;
+}*/

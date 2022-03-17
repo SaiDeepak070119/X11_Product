@@ -1,0 +1,130 @@
+<aura:component extends="c:X11_BaseComponent" controller="X11Community_LoginController">
+    
+    <aura:attribute name="username" type="String" />
+    <aura:attribute name="password" type="String" />
+    <aura:attribute name="forgotPasswordUsername" type="String" />
+    <aura:attribute name="showForgotPasswordSuccess" type="Boolean" default="false" />
+    <aura:attribute name="bshowAccountInfoComp" type="Boolean" default="false" />
+    
+    <div class="x11_community_header">
+        <div class="x11_community_header_row">
+            <div class="x11_logo">
+                <a href="{!$Label.c.X11_Home_Page_Link}">
+                    <img src="{!$Resource.X11_Logo}" />
+                </a>
+            </div>
+            <div class="x11_community_hamburger_menu slds-hide_medium" aura:id="x11_community_hamburger_menu"
+                 onclick="{!c.hamburgerMenuClickHandler}">
+                <span></span>
+            </div>
+            <div class="clearfix slds-hide_medium"></div>
+            <div class="x11_community_menu" aura:id="x11_community_menu">
+                <ul>
+                    <li>
+                        <a class="x11_links" href="{!$Label.c.X11_Menu_New_Request_Link}">{!$Label.c.X11_Menu_New_Request}</a>
+                    </li>
+                    <aura:if isTrue="{!v.isUserLoggedIn}"> 
+                        <li>
+                            <a class="x11_links" href="{!$Label.c.X11_Menu_My_Requests_Link}">{!$Label.c.X11_Menu_My_Requests}</a>
+                        </li>
+                    </aura:if>
+                    <li>
+                        <a class="x11_links" href="{!$Label.c.X11_Menu_All_Service_Requests_Link}">{!$Label.c.X11_Menu_All_Service_Requests}</a>
+                    </li>
+                    <li>
+                        <a class="x11_links" href="/s/faq">FAQ</a>
+                    </li>
+                    <!--li>
+                        <a class="x11_links" href="/s/barcode-scanner">BarCode Scanner</a>
+                    </li-->
+                    <aura:if isTrue="{!!v.isUserLoggedIn}"> 
+                        <li>
+                            <a class="x11_link_filled" href="#" onclick="{!c.loginClickHandler}">{!$Label.c.X11_Menu_Login}</a>
+                        </li>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isUserLoggedIn}"> 
+                        <li class="button">
+                            <a onclick="{!c.ShowAccountInfoDropDown}">{!$Label.c.X11_Menu_My_Account}</a>
+                            <aura:if isTrue="{!v.bshowAccountInfoComp}">
+                            <div aura:id="myAccountFormDropDown" class="myAccDropDown">
+                                <a class="my-account-option" href="{!$Label.c.X11_Menu_My_Account_Link}" onclick="{!c.ShowAccountInfoDropDown}" title="My Information" ><span>My Information</span></a>
+                                <a class="my-account-option" href="/secur/logout.jsp" onclick="{!c.logoutUser}" ><span>Logout</span></a> 
+                            </div>
+                            <li aura:id="myAccountFormDropDown" class="myAccDropDownMob">
+                                <div class="menu-item" onclick="{!c.ShowAccountInfoDropDown}"> <a href="{!$Label.c.X11_Menu_My_Account_Link}"  title="My Information" >My Information</a></div>
+                                <div class="menu-item" onclick="{!c.logoutUser}" ><a href="/secur/logout.jsp">Logout</a></div> 
+                            </li>
+                        </aura:if>
+                        </li>
+                        
+                    </aura:if>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- LOGIN POPUP -->
+    <c:X11_Popup aura:id="loginPopup" title="{!$Label.c.X11_Login_Modal_Header}">
+        <div class="x11_login slds-align_absolute-center">
+            <lightning:input aura:id="validateLoginInput" type="email" required="true" 
+                             label="{!$Label.c.X11_Login_Modal_Username}" 
+                             value="{!v.username}" 
+                             name="username" 
+                             class="slds-m-bottom_small" />
+            
+            <lightning:input aura:id="validateLoginInput" type="password" required="true" 
+                             label="{!$Label.c.X11_Login_Modal_Password}" 
+                             value="{!v.password}"
+                             name="password"
+                             class="slds-m-bottom_small" />
+            
+            <lightning:button variant="brand" onclick="{!c.signInClickHandler}" 
+                              label="{!$Label.c.X11_Login_Modal_Sign_In_Button}" 
+                              title="{!$Label.c.X11_Login_Modal_Sign_In_Button}" 
+                              class="slds-m-vertical_large" />
+            
+            <a href="{!$Label.c.X11_Login_Modal_Create_New_Account_Link}" 
+               class="x11_links slds-m-vertical_small">
+                {!$Label.c.X11_Login_Modal_Create_New_Account}
+            </a>
+            
+            <a href="#" onclick="{!c.forgotPasswordClickHandler}"
+               class="x11_links">
+                {!$Label.c.X11_Login_Modal_Forgot_Password}
+            </a>
+        </div>
+    </c:X11_Popup>
+    
+    <!-- Forgot PASSWORD POPUP -->
+    <c:X11_Popup aura:id="forgotPasswordPopup" title="{!$Label.c.X11_Forgot_Password_Modal_Header}">
+        <div class="x11_login slds-align_absolute-center">
+            <aura:if isTrue="{!!v.showForgotPasswordSuccess}">
+                <div class="slds-text-align_center">
+                    {!$Label.c.X11_Forgot_Password_Modal_Message}
+                </div>
+                
+                <lightning:input aura:id="validateForgotPasswordInput" type="email" required="true" 
+                                 label="{!$Label.c.X11_Login_Modal_Username}" 
+                                 value="{!v.forgotPasswordUsername}" 
+                                 name="username" 
+                                 class="slds-m-vertical_medium" />
+                
+                <lightning:button variant="brand" onclick="{!c.resetPasswordClickHandler}" 
+                                  label="{!$Label.c.X11_Forgot_Password_Modal_Button}" 
+                                  title="{!$Label.c.X11_Forgot_Password_Modal_Button}" 
+                                  class="slds-m-vertical_large" />
+                
+                <a href="{!$Label.c.X11_Login_Modal_Create_New_Account_Link}" 
+                   class="x11_links slds-m-vertical_small">
+                    {!$Label.c.X11_Login_Modal_Create_New_Account}
+                </a>
+            </aura:if>
+            <aura:if isTrue="{!v.showForgotPasswordSuccess}">
+                <div class="slds-text-align_center">
+                    {!$Label.c.X11_Forgot_Password_Modal_Success_Message}
+                </div>
+            </aura:if>
+        </div>
+    </c:X11_Popup>
+    
+</aura:component>

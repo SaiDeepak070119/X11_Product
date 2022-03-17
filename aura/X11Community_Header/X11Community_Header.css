@@ -1,0 +1,269 @@
+.THIS .clearfix {
+    clear: both;
+}
+
+.THIS.x11_community_header {
+    padding: 25px 20px;
+    border-bottom: 0.5px solid #999999;
+}
+.THIS.x11_community_header .x11_community_header_row {
+    display: flex;
+}
+.THIS.x11_community_header .x11_community_header_row  .x11_logo img {
+    margin-left: 30px;
+    cursor: pointer;
+    max-height: 45px;
+}
+
+/* Hamburger Menu Icon */
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu {
+    width: 30px;
+    height: 33px;
+    padding: 3px 6px;
+    position: relative;
+    z-index: 100;
+    box-sizing: content-box;
+    text-indent: 100%;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid rgba(0,45,114,.2);
+    border-radius: 2px;
+    margin-left: auto;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span,
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span:before, 
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span:after {
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #002d72;
+    border-radius: 4px;
+    transition: all .3s;
+    content: '';
+    left: 0px;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_menu > ul > li > a {
+    display: block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span {
+    top: 50%;
+    margin-top: -1px;
+    left: 50%;
+    margin-left: -12px;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span:before {
+    top: 6px;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu > span:after {
+    bottom: 6px;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu.open > span {
+	background: transparent;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu.open > span:before {
+    top: 0px;
+    transform: rotate(45deg);
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_hamburger_menu.open > span:after {
+    top: 0px;
+    transform: rotate(-45deg);
+}
+
+
+/* Menu */
+.THIS.x11_community_header .x11_community_header_row .x11_community_menu {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    z-index: 999;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_menu ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_menu > ul > li {
+    margin: 0px 10px;
+    flex: 1 1 auto;
+}
+.THIS.x11_community_header .x11_community_header_row .x11_community_menu > ul > li:first-child {
+    margin-left: 30px;
+}
+
+/* LOGIN POPUP */
+.THIS .x11_login {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+}
+.THIS .x11_login label {
+    font-size: 14px;
+    display: block;
+    font-weight: 600;
+    color: #002d72;
+    text-transform: uppercase;
+}
+.THIS .x11_login .slds-required {
+    display:  none;
+}
+.THIS .x11_login .slds-input {
+    height: 35px;
+    font-size: 14px;
+    color: #002d72;
+    border-radius: 0px;
+}
+/*.THIS .x11_login .slds-button {
+    display: block;
+    width: 100%;
+    padding: 5px 20px;
+    font-weight: 600;
+    background: #07344d;
+    color: #fff;
+    border: 0px solid transparent;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.THIS .x11_login a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #07344d;
+    font-weight: 600;
+}
+.THIS .x11_login a.forgotPassword {
+    color: #777;
+}*/
+.THIS .x11_login a {
+    display: block;
+    width: 100%;
+}
+.THIS .x11_login .slds-button {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+}
+.THIS .myAccDropDown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: left;
+    color: #006298;
+}
+.THIS .myAccDropDown .my-account-option {
+	color: #006298;
+    padding: 10px 15px;
+    border: 1px solid #bfe2f2;
+    background-color: #fff;
+    text-align: left;
+    text-decoration: none;
+}
+
+.THIS .myAccDropDownMob {
+    display: none;
+}
+
+.THIS ul li.menu-item a {
+	padding: 15px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.25rem;
+	text-decoration: none !important;
+	text-transform: uppercase;
+	color: #006298;
+	cursor: pointer;
+}
+
+.THIS ul li div.menu-item a {
+	font-size: 12px;
+	text-transform: none;
+	color: #006298;
+}
+
+.THIS ul li.myAccDropDownMob a.menu-item,
+.THIS ul li div.menu-item {
+	border-bottom: 1px solid #bfe2f2;
+	width: 92%;
+	margin: 0 auto;
+	color: #008bca;
+	display: block;
+}
+
+.THIS ul li.myAccDropDownMob a.menu-item span {
+	color: rgb(53, 88, 214);
+}
+
+.THIS .menu-item {
+	width: 100%;
+	line-height: 2.375rem;
+	margin-top: 0.625rem;
+	transition: border 0.25s ease;
+}
+
+.THIS ul li.menu-item:first-child {
+	margin-top: 5px !important;
+}
+@media only screen and (max-width: 767px) {
+    .THIS.x11_community_header {
+        padding: 20px;
+    }
+    .THIS.x11_community_header .x11_community_header_row {
+     	display: block;   
+    }
+    .THIS.x11_community_header .x11_community_header_row  .x11_logo {
+        float: left;
+    }
+    .THIS.x11_community_header .x11_community_header_row  .x11_logo img {
+        margin-left: 0px;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu {
+        display: none;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open {
+        display: block;
+        position: relative;
+        width: 100vw;
+        left: -20px;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul {
+        position: absolute;
+        display: block;
+        background: #fff;
+        width: 100%;
+        box-shadow: 0px 5px 5px 0px rgba(200, 200, 200, 0.5);
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul > li {
+        margin: 0px;
+        display: block;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul > li > a {
+		text-align: left;
+        padding: 15px;
+        display: block;
+        border: 0px solid transparent;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul > li.button > a {
+        background: #fff;
+        color: #07344d;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul > li:first-child {
+        margin-top: 20px;
+    }
+    .THIS.x11_community_header .x11_community_header_row .x11_community_menu.open > ul > li:last-child {
+        margin-bottom: 10px;
+    }
+     .THIS .myAccDropDownMob {
+        display: block;
+    }
+    .THIS .myAccDropDown {
+        display: none;
+    }
+}

@@ -1,0 +1,41 @@
+<aura:component>
+    
+    <aura:attribute name="popularCaseConfigurations" type="List" />
+    <aura:attribute name="currentSlideIndex" type="Integer" default="0" />
+    
+    <aura:registerEvent name="navigateToReportIssue" type="c:X11_E_NavigateToReportIssue" />
+
+    <div class="wrapper">
+        
+        <div class="x11_home_header">
+            {!$Label.c.X11_PopularServiceRequests}
+        </div>
+        
+        <div class="slds-grid slds-gutters">
+            <aura:iteration items="{!v.popularCaseConfigurations}" var="caseConfig" indexVar="index">
+                <div class="slds-col slds-size_11-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12 tile"
+                     data-index="{!index}">
+                    <div class="tile-container slds-p-around_small" data-id="{!caseConfig.caseId}" onclick="{!c.navigateToReportIssuePage}">
+                        <div>
+                            <div class="caseIcon slds-align_absolute-center">
+                                
+                            </div>
+                            <div class="x11_popular_title">{!caseConfig.caseType}</div>
+                            <div class="x11_popular_desc">{!caseConfig.caseDescription}</div>
+                        </div>
+                        <div class="slds-m-top_small slds-text-align_right">
+                            <div class="x11_popular_timeHeader">{!$Label.c.X11_EstimatedTime}</div>
+                            <div class="x11_popular_estimation">{!caseConfig.caseEstimation}&nbsp;{!$Label.c.X11_Days}</div>
+                        </div>       
+                    </div>
+                </div>
+            </aura:iteration> 
+            
+            <lightning:icon iconName="utility:chevronleft" alternativeText="chevronleft" class="previous-icon" onclick="{!c.previousSlideClickHandler}"/>
+            <lightning:icon iconName="utility:chevronright" alternativeText="chevronright" class="next-icon" onclick="{!c.nextSlideClickHandler}"/>
+            
+        </div>  
+        
+    </div>
+    
+</aura:component>

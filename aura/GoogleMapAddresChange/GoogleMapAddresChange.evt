@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event template" > 
+	<aura:attribute name="mapDataToPass" type = "Map" default=""/>
+</aura:event>

@@ -1,0 +1,59 @@
+.THIS.serviceRequestCardWrapper {
+    flex-wrap: wrap;
+}
+.THIS .slds-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.THIS .slds-card h2 {
+    color: #07344d;
+    font-size: 16px;
+    font-weight: 600;
+}
+.THIS .slds-card .label-text {
+    color: #07344d;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.THIS .slds-card .value-text {
+    color: #4a4a4a;
+    font-size: 14px;
+}
+.THIS .image-wrapper {
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.THIS .image-wrapper img {
+    width: 100%;
+}
+.THIS .image-wrapper .slds-icon_container.previous-icon,
+.THIS .image-wrapper .slds-icon_container.next-icon {
+    padding: 5px;
+    border-radius: 50%;
+    background: #ccc;
+    position: absolute;
+    top: calc(50% - 13px);
+    display: inline-block;
+    cursor: pointer;
+}
+.THIS .image-wrapper .slds-icon_container.previous-icon {
+    left: 5px;
+}
+.THIS .image-wrapper .slds-icon_container.next-icon {
+    right: 5px;
+}
+.THIS .image-wrapper .slds-icon_container svg {
+    width: 0.85rem;
+    height: 0.85rem;
+}
+.THIS .image-wrapper img {
+    display: none;
+}
+.THIS .image-wrapper img:first-child {
+    display: block;
+}

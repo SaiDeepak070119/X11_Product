@@ -1,0 +1,302 @@
+<aura:component
+  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+  access="global"
+  controller="X11_CustomRegistration_Ctrl"
+  extends="c:X11_BaseSuperComponent"
+>
+  <aura:attribute name="options" type="List" />
+  <aura:attribute name="selectedValue" type="String" default="Red" />
+  <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
+
+  <aura:attribute name="objCaseConfig" type="Object" />
+  <aura:attribute name="isPRA" type="boolean" />
+  <aura:attribute name="objContact" type="Object" />
+  <aura:attribute name="sContactId" type="String" />
+  <aura:attribute name="mapLabels" type="Map" />
+  <aura:attribute name="iStageIndentifier" type="String" />
+  <aura:attribute name="objCase" type="Case" />
+  <aura:attribute name="objUser" type="User" />
+  <aura:attribute
+    name="sCountryCode"
+    type="String"
+    description="country code to filter search results of address"
+  />
+  <aura:attribute
+    name="sSearchKey"
+    type="String"
+    description="store the user entered search key"
+  />
+  <aura:attribute
+    name="lstAddresses"
+    type="String[]"
+    description="stores the search results"
+  />
+  <aura:attribute name="bAddrDisabled" type="Boolean" default="true" />
+  <aura:attribute name="numbervalidity" type="Boolean" default="true" />
+  <aura:attribute name="bIsPortalUser" type="String" />
+  <aura:attribute
+    name="isEventCancelPopupOpen"
+    type="Boolean"
+    default="false"
+  />
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <aura:registerEvent
+    name="X11_RI_StatusBarEvent"
+    type="c:X11_RI_StatusBarEvent"
+  />
+  <aura:registerEvent name="testEvent" type="c:testEvent" />
+  <div class="X11-compAligns">
+    <div class="X11_ContactInfoMobile">
+      <aura:if
+        isTrue="{!v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type }"
+      >
+        <p class="PRA-NoteMsg slds-p-horizontal_xx-large slds-p-vertical_small"
+          ><b>PLEASE NOTE: </b> {!$Label.c.PRA_Disclaimer}
+        </p>
+      </aura:if>
+      <!--<div class="contact-title-header">
+            <p class="slds-p-top_large slds-p-bottom_small header">Thanks! Just need some contact information</p>
+            <h5>We will only send you updates about this service request.</h5>
+        </div>-->
+
+      <div class="slds-grid psd_form">
+        <div class="slds-col psd-frmLeft">
+          <lightning:input
+            aura:id="idFirstName"
+            label="{!v.mapLabels.sFirstName}"
+            name="firstname"
+            required="{!!(v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type)}"
+            value="{!v.objContact.sFirstName}"
+          />
+          <lightning:input
+            aura:id="idLastName"
+            label="{!v.mapLabels.sLastName}"
+            name="lastName"
+            required="{!!(v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type)}"
+            value="{!v.objContact.sLastName}"
+          />
+          <lightning:input
+            aura:id="idPhoneNumber"
+            label="{!v.mapLabels.sPhoneNumber}"
+            name="phoneNumber"
+            value="{!v.objContact.sPhone}"
+            onclick="{!c.hideErrorOnPhone}"
+            onchange="{!c.isNumberKey}"
+            onblur="{!c.formatPhone}"
+            required="{!!(v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type)}"
+          />
+          <span
+            aura:id="phoneError"
+            style="color: rgb(194, 57, 52);"
+            class="slds-hide"
+            >Phone number must be 10 digits.</span
+          >
+          <lightning:input
+            type="email"
+            aura:id="idEmail"
+            label="{!v.mapLabels.sEmail}"
+            name="email"
+            required="{!!(v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type)}"
+            value="{!v.objContact.sEmail}"
+          />
+          <!--aura:if isTrue="{!v.objCaseConfig.sCaseCategory == $Label.c.PRA_Case_Type }"-->
+          <lightning:input
+            type="text"
+            name=""
+            label="{!v.mapLabels.sORGANIZATION}"
+            value="{!v.objContact.sOrganization}"
+          ></lightning:input>
+          <!--/aura:if-->
+        </div>
+        <div class="slds-col psd-frmRight">
+          <lightning:input
+            type="text"
+            aura:id="idSearchKey"
+            label="{!v.mapLabels.sAddress}"
+            name="searchKey"
+            onchange="{!c.getAddressesForKey}"
+            value="{!v.sSearchKey}"
+          />
+          <div class="slds-combobox_container">
+            <div
+              class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup address-component"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              role="combobox"
+              aura:id="idSearchLookup"
+            >
+              <div
+                class="font-bold slds-combobox__form-element"
+                id="RegistrationField"
+              >
+                <div id="listbox-unique-id" role="combobox">
+                  <aura:if isTrue="{!v.lstAddresses.length > 0}">
+                    <ul
+                      class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                      role="presentation"
+                    >
+                      <aura:iteration items="{!v.lstAddresses}" var="option">
+                        <li
+                          role="presentation"
+                          class="slds-listbox__item"
+                          onclick="{!c.showAddressDetails}"
+                          onkeydown="{!c.populateValue}"
+                          data-value="{!option.value}"
+                          data-record="{!option.label}"
+                        >
+                          <span
+                            id="listbox-option-unique-id-01"
+                            class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                            role="option"
+                            aria-describedby="info"
+                            tabindex="0"
+                          >
+                            <span class="slds-media__body">
+                              <span
+                                class="slds-listbox__option-text slds-listbox__option-text_entity"
+                                >{!option.label}</span
+                              >
+                            </span>
+                          </span>
+                        </li>
+                      </aura:iteration>
+                    </ul>
+                  </aura:if>
+                </div>
+              </div>
+            </div>
+          </div>
+          <lightning:input
+            aura:id="idStreet"
+            label="{!v.mapLabels.sStreet}"
+            disabled="{!v.bAddrDisabled}"
+            value="{!v.objContact.sStreet}"
+          />
+          <lightning:input
+            type="text"
+            name=""
+            label="{!v.mapLabels.sSuite}"
+            disabled="{!v.bAddrDisabled}"
+            value="{!v.objContact.sSuite}"
+          />
+          <div class="slds-grid X11Citystate">
+            <lightning:input
+              aura:id="idCity"
+              label="{!v.mapLabels.sCity}"
+              class="X11-city"
+              disabled="{!v.bAddrDisabled}"
+              value="{!v.objContact.sCity}"
+            />
+
+            <lightning:select
+              name="mySelect"
+              class="X11-state"
+              disabled="{!v.bAddrDisabled}"
+              label="STATE"
+              aura:id="mySelect"
+              value="{!v.objContact.sState}"
+            >
+              <aura:iteration items="{!v.options}" var="item">
+                <option
+                  text="{!item.label}"
+                  value="{!item.value}"
+                  selected="{!item.selected}"
+                />
+              </aura:iteration>
+            </lightning:select>
+
+            <!--  <lightning:input aura:id="idState" label="{!v.mapLabels.sState}"
+                                 class="X11-state" 
+                                 disabled="{!v.bAddrDisabled}"
+                                 value="{!v.objContact.sState}" /> -->
+          </div>
+          <lightning:input
+            aura:id="idPostalCode"
+            label="{!v.mapLabels.sPostalCode}"
+            disabled="{!v.bAddrDisabled}"
+            value="{!v.objContact.sPostalCode}"
+          />
+        </div>
+      </div>
+
+      <div class="btn-wrapper">
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-large-size_6-of-12">
+            <div class="slds-grid">
+              <div>
+                <lightning:button
+                  class="x11_btn_brand"
+                  label="BACK"
+                  name="{!objCaseConfig}"
+                  onclick="{!c.backCreation}"
+                />
+              </div>
+              <div class="slds-m-left_large">
+                <lightning:button
+                  variant="base"
+                  label="CANCEL"
+                  title="CANCEL"
+                  class="x11_btn_base"
+                  onclick="{!c.onCancelClick}"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="slds-col slds-large-size_6-of-12">
+            <div class="slds-float_right">
+              <lightning:button
+                label="NEXT"
+                class="review-btn x11_btn_brand"
+                variant="brand"
+                onclick="{!c.verifyDetails}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cancel-btn-wrapper">
+    <lightning:button
+      variant="base"
+      label="CANCEL"
+      title="CANCEL"
+      class="x11_btn_base"
+      onclick="{!c.onCancelClick}"
+    />
+  </div>
+  <div class="breadcrumb-container">
+      <div class="breadcrumb-wrap sticky-breadcrumb">
+        <div class="back-btn" name="backbtn">
+          <lightning:icon
+            iconName="utility:back"
+            alternativeText="BACK"
+            variant="inverse"
+            size="small"
+            onclick="{!c.backCreation}"
+          />
+        </div>
+        <div class="page-wrap">
+          <div class="page-num" name="pageNumber">3</div>
+          <div class="page-name" name="pageName">Contact Information</div>
+        </div>
+        <div class="next-btn" name="next" onclick="{!c.continueCreation}">
+          <lightning:icon
+            iconName="utility:forward"
+            alternativeText="forward"
+            variant="inverse"
+            size="small"
+            onclick="{!c.verifyDetails}"
+          />
+        </div>
+      </div>
+    </div>
+    <!--aura:if isTrue="{!v.isEventCancelPopupOpen}">
+        <c:cancelParkEventPopup
+        isPortalUser="{!v.bIsPortalUser}"                      
+        isopen="{!v.isEventCancelPopupOpen}"
+        onclose="{!c.onEventCancelPopupClose}"
+        is311="true"
+        ></c:cancelParkEventPopup>
+    </aura:if-->
+</aura:component>

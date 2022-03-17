@@ -1,0 +1,161 @@
+<aura:component access="global" controller="X11_RI_ParentController" extends="c:X11_BaseSuperComponent">
+	<ltng:require scripts="{!$Resource.X11_aws_sdk}" />
+	<aura:attribute name="objCaseConfig" type="Object" />
+	<aura:attribute name="sCaseNumber" type="String" />
+	<aura:attribute name="bIsPortalUser" type="String" />
+	<aura:attribute name="sContactId" type="String" />
+	<aura:attribute name="objContact" type="Object" />
+	<aura:attribute name="objCase" type="Case" />
+	<aura:attribute name="formattedAddress" type="String" />
+	<aura:attribute name="selectedFileList" type="List" />
+	<aura:attribute name="showCancelPopup" type="Boolean" default="false" />
+    <aura:attribute name="amazonsetting" type="Map"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:registerEvent name="X11_RI_StatusBarEvent" type="c:X11_RI_StatusBarEvent"/>
+    <aura:registerEvent name="AWSFileUploadEvent" type="c:AWSFileUploadEvent"/>
+    <aura:attribute name="isSpinnerActive" type="Boolean" default="false" access="Public" />
+	<div class="lightning-compAligns">
+		<div class="request-review-wrapper">
+			<p class="reviewSubhead">Review Information</p>
+			<div class="slds-grid ReqRev">
+				<div class="slds-col card-section">
+					<div class="card">
+						<div class="slds-grid">
+							<p class="step-holder active-step-holder">1</p>
+						</div>
+						<div>
+							<div class="subHeadicon">
+								<div class="request-text">LOCATION</div>
+								<div class="icon-wrapper" onclick="{!c.navigateToStage}" data-id="1">
+									<lightning:icon iconName="utility:edit" alternativeText="Edit" />
+								</div>
+							</div>
+
+							<div class="value-text">
+								{!v.objCase.Street_Address__c}, {!v.objCase.City__c}, {!v.objCase.State__c},
+								{!v.objCase.Zipcode__c}, {!v.objCase.Country__c}
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="slds-grid">
+							<p class="step-holder active-step-holder">2</p>
+						</div>
+
+						<div>
+							<div class="subHeadicon">
+								<div class="request-text">DETAILS</div>
+								<div class="icon-wrapper" onclick="{!c.navigateToStage}" data-id="1">
+									<lightning:icon iconName="utility:edit" alternativeText="Edit" />
+								</div>
+							</div>
+							<div class="slds-scrollable">
+								<aura:iteration items="{!v.objCaseConfig.lstCaseQuestion}" var="objCaseQuestion">
+									<div class="info-wrapper">
+										<div class="label-text">
+											{!objCaseQuestion.sQuestion}
+										</div>
+										<aura:if isTrue="{!objCaseQuestion.sAnswer !=''}">
+											<aura:if isTrue="{!objCaseQuestion.sQuestion =='DATE/TIME OBSERVED'}">
+												<div class="value-text">
+													<lightning:formattedDateTime value="{!objCaseQuestion.sAnswer}"
+														year="numeric" day="2-digit" month="long" hour="2-digit"
+														minute="2-digit" />
+												</div>
+												<aura:set attribute="else">
+													<div class="value-text">{!objCaseQuestion.sAnswer}</div>
+												</aura:set>
+											</aura:if>
+											<aura:set attribute="else">
+												<div class="value-text">N/A</div>
+											</aura:set>
+										</aura:if>
+									</div>
+								</aura:iteration>
+								<div class="label-text">{!v.selectedFileList.length} Attachments Uploaded</div>
+								<div class="value-text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col card-section">
+					<div class="card">
+						<div class="slds-grid">
+							<p class="step-holder active-step-holder">3</p>
+						</div>
+
+						<div>
+							<div class="subHeadicon">
+								<div class="request-text">CONTACT INFORMATION</div>
+								<div class="icon-wrapper" onclick="{!c.navigateToStage}" data-id="2">
+									<lightning:icon iconName="utility:edit" alternativeText="Edit" />
+								</div>
+							</div>
+							<div>
+								<div class="info-wrapper">
+									<div class="label-text">NAME</div>
+									<div class="value-text">{!(v.objContact.sFirstName + ' ' + v.objContact.sLastName)}</div>
+								</div>
+
+								<div class="info-wrapper">
+									<div class="label-text">PHONE</div>
+									<div class="value-text">{!v.objContact.sPhone}</div>
+								</div>
+
+								<div class="info-wrapper">
+									<div class="label-text">EMAIL</div>
+									<div class="value-text">{!v.objContact.sEmail} </div>
+								</div>
+
+								<div class="info-wrapper">
+									<div class="label-text">ADDRESS</div>
+									<div class="value-text">{!v.formattedAddress}</div>
+								</div>
+
+								<div class="info-wrapper">
+									<div class="label-text">ORGANIZATION</div>
+									<div class="value-text">{!v.objContact.sOrganization}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="slds-clearfix cancel-btn-wrapper">
+				<lightning:button variant="base" label="CANCEL" title="CANCEL" class="x11_btn_base" onclick="{!c.cancelButtonClickHandler}" />
+				<div class="slds-float_right">
+					<lightning:button class="x11_btn_brand slds-m-top_medium" label="Submit" name="{!objCaseConfig}" onclick="{!c.submitButtonClickHandler}" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="next-btn-mob" name="submit">
+		<span class="continue-btn-mob" onclick="{!c.submitButtonClickHandler}">Submit</span>
+	</div>
+
+	<div class="breadcrumb-container">
+		<div class="breadcrumb-wrap sticky-breadcrumb">
+			<div class="back-btn" name="backbtn">
+				<lightning:icon iconName="utility:back" alternativeText="BACK" variant="inverse" size="small"
+					onclick="{!c.backButtonClickHandler}" />
+			</div>
+			<div class="page-wrap">
+				<div class="page-num" name="pageNumber">4</div>
+				<div class="page-name" name="pageName">Review</div>
+			</div>
+			<div class="next-btn" name="next" onclick="{!c.submitButtonClickHandler}">
+				<lightning:icon iconName="utility:forward" alternativeText="forward" variant="inverse" size="small" />
+			</div>
+		</div>
+	</div>
+
+	<!--aura:if isTrue="{!v.showCancelPopup}">
+		<c:cancelParkEventPopup isPortalUser="{!v.isPortalUser}" isopen="{!v.showCancelPopup}" onclose="{!c.closeCancelPopup}" is311="true"></c:cancelParkEventPopup>
+	</aura:if-->
+</aura:component>

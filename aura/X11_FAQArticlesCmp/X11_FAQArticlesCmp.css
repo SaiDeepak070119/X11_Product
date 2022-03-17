@@ -1,0 +1,102 @@
+.THIS {
+  color: #4f4f4f;
+  font-size: 1rem;
+}
+.THIS .filter-container .slds-input {
+  height: 3rem;
+}
+.THIS .filter-container .clb-subheader {
+  font-size: 1.625rem;
+}
+.THIS .slds-icon {
+  height: 1rem;
+  width: 1rem;
+}
+.THIS svg.slds-icon {
+  fill: #006298;
+}
+.THIS .accordion-layout {
+  background: off-white;
+}
+
+.THIS .accordion {
+  background-color: #fff;
+  width: 100%;
+  text-align: left;
+  transition: 0.4s;
+  font-size: 1.125rem;
+  display: flex;
+  justify-content: space-between;
+  border: none;
+  padding: 1.5rem 0;
+  cursor: pointer;
+  color: #000;
+  border-top: 1px solid t(lightestGray);
+}
+.THIS .panel {
+  display: none;
+}
+.THIS .accordion .img_dash {
+  display: none;
+}
+.THIS .accordion.active .img_add {
+  display: none;
+}
+.THIS .accordion.active .img_dash {
+  display: block;
+}
+.THIS .faq-list-wrapper {
+  border-radius: 10px;
+  box-shadow: 1px 2px 12px 0 rgba(209, 212, 218, 0.75),
+    1px 1px 3px 0 rgba(209, 212, 218, 0.75);
+  padding: 2rem 1.5rem;
+}
+.THIS .faq-list-wrapper .faq-list-title {
+  font-size: 1.5rem;
+  color: #4f4f4f;
+}
+.THIS .btn-wrapper .clb-secondary-btn {
+  display: none;
+}
+.THIS .filter-container .topic-dropdown {
+    width: 100%;
+    padding: 0;
+    border-radius: 2px;
+    color: #000000;
+    font-family: 'Raleway-SemiBold','OpenSans-SemiBold';
+    height: 48px;
+}
+.THIS .filter-container .topic-dropdown .slds-form-element__label{
+    display:none;
+}
+/* Google translate changes end */
+@media screen and (max-width: 768px) {
+  .THIS.faq-container {
+    padding: 2rem 1rem;
+  }
+  .THIS .filter-container .slds-m-top_xx-large {
+    margin-top: 2rem;
+  }
+    /* Google translate changes start 
+  .THIS .filter-container .topic-dropdown {
+    margin-bottom: 1rem;
+  }
+     Google translate changes end*/
+  .THIS .filter-container .slds-input {
+    height: auto;
+  }
+  .THIS .accordion,
+  .THIS .panel,
+  .THIS .filter-container .clb-subheader {
+    font-size: 0.875rem;
+  }
+  .THIS .faq-list-wrapper .faq-list-title {
+    font-size: 1rem;
+  }
+  .THIS .btn-wrapper .clb-primary-btn {
+    display: none;
+  }
+  .THIS .btn-wrapper .clb-secondary-btn {
+    display: block;
+  }
+}

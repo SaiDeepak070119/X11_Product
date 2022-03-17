@@ -1,0 +1,161 @@
+.THIS{
+    flex-direction:column;
+}
+.THIS .slds-has-error .slds-form-element__help {
+    color: #c23934;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: normal;
+    text-transform: none;
+}
+.THIS.lightning-compAligns > div {
+    width: 960px;
+    margin: 0 auto;
+    padding-bottom: 54px;
+}
+.THIS .slds-card{
+    /* width: 395px;
+    padding: 30px 34px 42px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5); */
+    border-radius: 3px;
+    border: 1px solid #d4d4d4;
+}
+
+.THIS .slds-card .slds-card__header{
+    display:none;
+}
+
+.THIS .info-wrapper{
+    margin-bottom:15px;
+}
+
+.THIS .label-text,
+.THIS .slds-form-element__label{
+    color:t(SelectionGray);
+    font-size:12px;
+    font-weight: 300;
+}
+
+.THIS .value-text,
+.THIS .slds-input{
+    color:t(SelectionGray);
+    font-size:12px;
+}
+
+.THIS .slds-input{
+    height:40px;
+}
+
+
+.THIS .request-text{
+    font-size: 24px;
+    color:t(darkBlue);
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: bold;
+    padding-bottom: 1.5rem;
+}
+
+.THIS .track-text{
+    font-size: 14px;
+    color:#787072;
+    margin-bottom:20px;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: normal;
+}
+.THIS .slds-button.slds-button_brand {
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.THIS .request-number{
+    display:inline;
+    font-size: 14px;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: bold;
+    color: #787072;
+}
+.THIS .slds-card{
+    border: 2px solid #d6d4d6;
+    border-radius: 3px;
+}
+.THIS .slds-card.submit-login .slds-card__body,
+.THIS .slds-card.submit-register .slds-card__body{
+    display: flex;
+    margin: 24px 80px;
+    /* justify-content: space-around; */
+}
+.THIS .label-text,
+.THIS .label-text .slds-form-element__label{
+  font-family: 'Gotham A', 'Gotham B';
+  font-weight: bold;
+  font-size: 12px;
+  color: #006298;
+  text-transform: uppercase;
+}
+
+.THIS .value-text{
+  font-family: 'Gotham A', 'Gotham B';
+  font-weight: normal;
+  font-size: 14px;
+  color: #000000;
+  margin-right: 32px;
+}
+.THIS .info-wrapper {
+    margin: 0;
+}
+.THIS .info-wrapper.proEmailCheckbox {
+    margin-top: 36px;
+}
+.THIS .info-wrapper-col .info-wrapper {
+    margin-bottom: 12px;
+}
+.THIS .info-wrapper-col {
+    width: 50%;
+}
+.THIS.CreateMyAccBtn{
+    background-color: #006298;
+    border-radius: 3px;
+    border: 1px solid #006298;
+}
+
+.THIS .Registerbtn{
+    display: flex;
+    justify-content: flex-end;
+}
+.THIS .PRA-reqBtns {
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (min-width: 320px) and (max-width: 767.33px) {
+    .THIS.lightning-compAligns > div {
+		margin: auto 17px;
+        width: auto;
+        margin-top: 30px;
+    }
+    .THIS .continue-btn {
+        width: 100%;
+        margin-top: 30px;
+    }
+    .THIS .request-text {
+        text-align: center;
+    }
+    .THIS .slds-card.submit-login .slds-card__body,
+	.THIS .slds-card.submit-register .slds-card__body{
+    	margin: 20px 18px;
+        flex-direction: column;
+	}
+    .THIS .info-wrapper-col {
+        width: 100%;
+    }
+    .THIS .label-text,
+    .THIS .label-text .slds-form-element__label{
+		margin-bottom: 10px;
+    }
+    .THIS .info-wrapper-col .info-wrapper {
+        margin-bottom: 20px;
+    }
+    .THIS .slds-button.slds-button_brand {
+        width: 100%;
+    }
+}

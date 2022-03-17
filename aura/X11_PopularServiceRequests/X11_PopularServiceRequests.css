@@ -1,0 +1,57 @@
+.THIS .slds-grid {
+    position: relative;
+}
+.THIS .tile-container {
+    border: 1px solid;
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transform: scale(1);
+    transition: 0.3s all ease;
+}
+.THIS .tile-container:hover {
+    transform: scale(1.05);
+}
+.THIS .slds-icon_container.previous-icon,
+.THIS .slds-icon_container.next-icon {
+    padding: 5px;
+    border-radius: 50%;
+    background: #ccc;
+    position: absolute;
+    top: calc(50% - 13px);
+    display: none;
+}
+@media only screen and (min-width: 768px) {
+    .THIS .tile {
+        display: flex !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .THIS .tile {
+        margin: 0px auto;
+        display: none;
+    }
+    .THIS .tile:first-child {
+        display: block;
+    }
+    .THIS .tile-container:hover {
+        transform: scale(1);
+    }
+    .THIS .slds-icon_container.previous-icon,
+	.THIS .slds-icon_container.next-icon {    
+        display: inline-block;
+    }
+    .THIS .slds-icon_container.previous-icon {
+        left: 0px;
+    }
+    .THIS .slds-icon_container.next-icon {
+        right: 0px;
+    }
+    .THIS .slds-icon_container svg {
+        width: 1rem;
+        height: 1rem;
+    }
+}

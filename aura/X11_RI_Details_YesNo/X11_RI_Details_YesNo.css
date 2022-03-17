@@ -1,0 +1,33 @@
+.THIS .yes-btn{
+    margin-right:1rem;
+}
+
+
+.THIS .yes-no-btn{
+    border:1px solid t(darkBlue);
+    border-radius:4px;
+    color:t(darkBlue);
+    height:51px;
+    width:147px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.THIS .yes-no-btn:hover{
+    background:t(offWhite);
+    color:t(darkBlue);
+}
+
+.THIS .yes-no-btn:active{
+     background:t(darkBlue);
+    color:t(white);
+}
+.THIS .yes-no-btn:focus{
+     background:t(darkBlue);
+    color:t(white);
+}
+
+.THIS .selected-btn{
+    background:t(darkBlue);
+    color:t(white);
+}

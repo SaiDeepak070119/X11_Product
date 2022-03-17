@@ -1,0 +1,33 @@
+<aura:component>
+    
+    <aura:attribute name="loadMap" type="Boolean" default="false" />
+    <aura:attribute name="vfHost" type="String" default="" />
+    <aura:attribute name="lcHost" type="String" />
+
+    <aura:attribute name="mapOptions" type="Object" default='{"zoom": 15}' />
+    <aura:attribute name="mapOptionsCenter" type="Object" />
+    <aura:attribute name="mapData" type="Object[]" />
+
+    <aura:attribute name="isLocationIdentifiedFromImage" type="Boolean" default="false" />
+    <aura:attribute name="selectedMapValues" type="Map" />
+    <aura:attribute name="mapDataFromVFPage" type="Map" default="{'address':'', 'latLong':'', 'postal':'', 'country':'', 'city':'',
+                                                                    'cityName':'', 'streetaddress':'', 'streetNum':'', 'city':'',
+                                                                    'boundCheck':false}" />
+
+    <aura:attribute name="isPortalUser" type="String" />
+    <aura:attribute name="LOCATION_ORIGIN" type="Map" default="{'INIT': 0,'BROWSER': 1,'IMAGE': 2,'MANUAL': 3}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <aura:registerEvent name="GoogleMapAddresChange" type="c:GoogleMapAddresChange" />
+    <aura:handler event="c:SendUploadedFileDataToParent" action="{!c.populateFileData}"/>
+
+    <aura:if isTrue="{!v.isPortalUser == 'false'}">
+        <iframe id="ifarmeId" aura:id="vfFrame" src="{!'/apex/GoogleMapPage?lcHost=' + v.lcHost}"
+                style="border:none" width="600" height="500" />
+        <aura:set attribute="else">
+            <iframe id="ifarmeId" aura:id="vfFrame" src="{!'/GoogleMapPage?lcHost=' + v.lcHost}"
+                    style="border:none" width="1000" height="500" />
+        </aura:set>
+    </aura:if>
+</aura:component>

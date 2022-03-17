@@ -1,0 +1,99 @@
+<aura:component>
+	<ltng:require scripts="{!$Resource.X11_aws_sdk}"/>
+    <aura:attribute name="serviceRequests" type="List" />
+    <aura:attribute name="numberOfRecordsPerPage" type="Integer" default="5" />
+
+    <aura:attribute name="currentPageNumber" type="Integer" default="1" />
+    <aura:attribute name="totalPages" type="Integer" default="1" />
+    <aura:attribute name="pagesToShow" type="List" />
+	<aura:attribute name="amazonsetting" type="Map"/>
+    <aura:attribute name="imageDataUrlList" type="List"/>
+    <aura:handler name="init" value="this" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.serviceRequests}" action="{!c.init}" />
+
+    <aura:registerEvent name="cardSelect" type="c:X11_E_ServiceRequestCardEvent" />
+
+    <aura:iteration items="{!v.serviceRequests}" var="request" 
+                    start="{!(v.currentPageNumber - 1) * v.numberOfRecordsPerPage}" 
+                    end="{!(v.currentPageNumber - 1) * v.numberOfRecordsPerPage + v.numberOfRecordsPerPage}">
+        <lightning:layout class="serviceRequestCard">
+            <lightning:layoutItem size="4" class="borderRight">
+                <!--aura:if isTrue="{!request.imageUrl.length>0}">
+                    <img class="serviceRequestImage" src="{!request.imageUrl}" />
+                </aura:if-->
+                
+                <aura:if isTrue="{!v.imageDataUrlList.length>0}">
+                	<aura:iteration items="{!v.imageDataUrlList}" var="img" indexVar="key">
+                        <aura:if isTrue="{!request.caseObj.CaseNumber == img.key}">
+                            <img class="serviceRequestImage" src="{!img.value}" />
+                        </aura:if>
+                        </aura:iteration>
+                </aura:if>
+            </lightning:layoutItem>
+
+            <lightning:layoutItem size="8" padding="around-small">
+                <div class="preHeader slds-m-bottom_x-small">
+                    <div class="requestNumber slds-m-right_x-small">Service Req. {!request.caseObj.CaseNumber}</div>
+                    <div class="requestDate slds-m-right_x-small">
+                        <lightning:formattedDateTime value="{!request.caseObj.CreatedDate}" 
+                                                    year="numeric" day="2-digit" month="long" hour="2-digit" minute="2-digit"/>
+                    </div>
+                    <div class="requestStatus slds-float_right slds-m-right_x-small">
+                        <aura:if isTrue="{!request.caseObj.Status == 'Closed'}">
+                            <div class="requestStatusColor closed"></div>
+                        </aura:if>
+                        <aura:if isTrue="{!request.caseObj.Status == 'New'}">
+                            <div class="requestStatusColor new"></div>
+                        </aura:if>
+                        <aura:if isTrue="{!request.caseObj.Status == 'In Progress'}">
+                            <div class="requestStatusColor inProgress"></div>
+                        </aura:if>
+                        {!request.caseObj.Status}
+                    </div>
+                </div>
+                <header class="slds-m-bottom_x-small">
+                    <a onclick="{!c.cardClickHandler}" data-request-id="{!request.caseObj.Id}" class="requestType">
+                        {!request.caseObj.Type}
+                    </a>
+                </header>
+                <lightning:icon iconName="utility:checkin" size="x-small" 
+                                class="requestAddressIcon" alternativeText="Utility image" />
+                <span class="requestAddress">{!request.caseObj.Street_Address__c}</span>
+
+                <div class="slds-m-top_small">
+                    <span class="requestDescriptionHeading">Description:</span>
+                    <p class="requestDescription">{!request.caseObj.Description}</p>
+                </div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:iteration>
+
+    <!-- Pagination -->
+    <lightning:layout horizontalAlign="left" multipleRows="true" class="slds-m-top_x-large slds-p-vertical_x-large serviceRequestCardPagination">
+        <lightning:layoutItem flexibility="grow" class="slds-p-horizontal_small paginationButtons" 
+                              size="12" largeDeviceSize="10" mediumDeviceSize="10" smallDeviceSize="12">
+
+            <lightning:buttonIcon iconName="utility:back" size="large" variant="neutral" 
+                                  alternativeText="Previous" title="Previous" class="paginationButton"
+                                  disabled="{!v.currentPageNumber == 1}"
+                                  onclick="{!c.moveToPreviousPage}" />
+            
+            <aura:iteration items="{!v.pagesToShow}" var="row">
+                <lightning:button name="{!row}" label="{!row}" class="paginationButton" 
+                                  variant="{!(row == v.currentPageNumber) ? 'brand' : 'neutral'}"  
+                                  onclick="{!c.moveToSelectedPage}"/>
+            </aura:iteration>
+            
+            <lightning:buttonIcon iconName="utility:forward" size="large" variant="neutral" 
+                                  alternativeText="First" title="First" class="paginationButton"
+                                  disabled="{!v.currentPageNumber == v.totalPages}"
+                                  onclick="{!c.moveToNextPage}" />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem flexibility="grow" class="pageNumberDetails" 
+                              size="12" largeDeviceSize="2" mediumDeviceSize="2" smallDeviceSize="12">
+            [Page {!v.currentPageNumber} of {!v.totalPages}]
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>

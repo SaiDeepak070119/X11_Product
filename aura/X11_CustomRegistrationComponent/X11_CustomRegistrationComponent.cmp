@@ -1,0 +1,153 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" 
+                controller="X11Community_Registration_Ctrl"
+                extends="c:X11_BaseComponent">
+
+	<aura:attribute name="confirmPassword" type="String" />
+	<aura:attribute name="addressSearchKey" type="String" />
+	<aura:attribute name="addressSearchResult" type="String[]" />
+	<aura:attribute name="bAddrDisabled" type="Boolean" default="true" />
+	<aura:attribute name="bIsError" type="Boolean" default="false" />
+	<aura:attribute name="bIsPswrdMatch" type="Boolean" />
+	<aura:attribute name="errorMessageType" type="String" default="error" />
+	<aura:attribute name="errorMessages" type="List" />
+	<aura:attribute name="errorMessage" type="String" />
+	<aura:attribute name="objForm" type="Object" />
+	<aura:attribute name="userName" type="String" />
+
+	<lightning:navigation aura:id="navService"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+	<c:X11Community_PageHeader headerLine2="{!$Label.c.X11_Login_Modal_Create_New_Account}" />
+    
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+            <div class="slds-grid slds-wrap slds-gutters_direct-xx-large slds-m-top_xx-large register-form-container">
+				<div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+					<lightning:input aura:id="firstName" label="{!$Label.c.X11_Registration_Form_Field_First_Name}" name="firstname"
+										value="{!v.objForm.sFirstName}" required="true"				 
+										class="slds-m-bottom_large" />
+		
+					<lightning:input aura:id="lastName" label="{!$Label.c.X11_Registration_Form_Field_Last_Name}" name="lastName"
+										value="{!v.objForm.sLastName}" required="true"				 
+										class="slds-m-bottom_large" />
+		
+					<lightning:input aura:id="phoneNumber" label="{!$Label.c.X11_Registration_Form_Field_Phone_Number}" name="phoneNumber"
+										value="{!v.objForm.sPhoneNumber}" required="true"				 
+										class="slds-m-bottom_large"
+										onchange="{!c.isNumberKey}" onblur="{!c.formatPhone}" minlength="10" maxlength="10" />
+		
+					<lightning:input aura:id="email" label="{!$Label.c.X11_Registration_Form_Field_Email}" name="email"
+									 value="{!v.objForm.sEmail}" required="true"				 
+									 class="slds-m-bottom_large" />
+		
+					<lightning:input type="password" aura:id="password" label="{!$Label.c.X11_Registration_Form_Field_Password}" name="password"
+									 value="{!v.objForm.sPassword}" required="true"
+									 class="slds-m-bottom_large" 
+									 title="Your password must contain a minimum of 8 total characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character (!@#$%.^)."
+									 pattern="^(?=.*[A-Z])(?=.*[!@#$*\^%\*\.])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+									 messageWhenPatternMismatch="Your password must contain a minimum of 8 total characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character (!@#$%.^)." />
+		
+					<lightning:input type="password" aura:id="confirmPassword" label="{!$Label.c.X11_Registration_Form_Field_Confirm_Password}" name="confirmPassword"
+									 value="{!v.confirmPassword}" required="true"
+									 class="slds-m-bottom_large" />
+				
+				</div>
+		
+				<div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+					
+					<lightning:input type="text" aura:id="addressSearchKey" label="{!$Label.c.X11_Registration_Form_Field_Address}"
+									 value="{!v.addressSearchKey}" required="false"
+									 name="searchKey"
+									 onchange="{!c.searchAddresses}" />
+		
+					<div class="slds-combobox_container">
+						<div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup address-component"
+							aria-expanded="false" aria-haspopup="listbox" role="combobox" aura:id="addressLookup">
+							<div class="font-bold slds-combobox__form-element" id="RegistrationField">
+								<div id="listbox-unique-id" role="combobox">
+									<aura:if isTrue="{!v.addressSearchResult.length > 0}">
+										<ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+											role="presentation">
+											<aura:iteration items="{!v.addressSearchResult}" var="option">
+												<li role="presentation" class="slds-listbox__item"
+													onclick="{!c.showAddressDetails}"
+													data-value="{!option.value}" data-record="{!option.label}">
+													<span class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+														  role="option" aria-describedby="info" tabindex="0">
+														<span class="slds-media__body">
+															<span class="slds-listbox__option-text slds-listbox__option-text_entity">
+																{!option.label}
+															</span>
+														</span>
+													</span>
+												</li>
+											</aura:iteration>
+										</ul>
+									</aura:if>
+								</div>
+							</div>
+						</div>
+					</div>
+		
+					<lightning:input aura:id="street" label="{!$Label.c.X11_Registration_Form_Field_Street}" name="street"
+									 value="{!v.objForm.sStreet}" required="false" disabled="{!v.bAddrDisabled}"
+									 class="slds-m-top_large slds-m-bottom_large" />
+		
+					<lightning:input aura:id="suite" label="{!$Label.c.X11_Registration_Form_Field_Suite_Apt_Number}" name="suite"
+									 value="{!v.objForm.sSuite}" required="false" disabled="{!v.bAddrDisabled}"
+									 class="slds-m-bottom_large" />
+		
+					<div class="slds-grid">
+						<lightning:input aura:id="city" label="{!$Label.c.X11_Registration_Form_Field_City}" name="city"
+									  	 value="{!v.objForm.sCity}" required="false" disabled="{!v.bAddrDisabled}"
+									     class="slds-col slds-m-bottom_large slds-p-right_small slds-form-element slds-size_6-of-12" />
+		
+						<lightning:input aura:id="state" label="{!$Label.c.X11_Registration_Form_Field_State}" name="state"
+									 	 value="{!v.objForm.sState}" required="false" disabled="{!v.bAddrDisabled}"
+								 	 	 class="slds-col slds-m-bottom_large slds-p-left_small slds-form-element slds-size_6-of-12" />
+					</div>
+		
+					<lightning:input aura:id="zipcode" label="{!$Label.c.X11_Registration_Form_Field_Zip_Code}" name="zipcode"
+									 value="{!v.objForm.sPostalCode}" required="false" disabled="{!v.bAddrDisabled}"
+									 class="slds-m-bottom_large" />
+		
+					<lightning:input aura:id="country" label="{!$Label.c.X11_Registration_Form_Field_Country}" name="country"
+									 value="{!v.objForm.sCountry}" required="false"
+									 class="slds-m-bottom_large" />
+				</div>
+			</div>
+		
+			<div class="slds-grid slds-wrap slds-gutters_direct-xx-large checkbox-container slds-m-bottom_large">
+				<div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+					<lightning:input class="slds-p-bottom_x-small checkbox" type="checkbox"
+									 label="I want to opt into promotional emails." 
+									 checked="{!v.objForm.bPormotionalEmail}" />
+				</div>
+				<div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12">
+					<lightning:input class="slds-p-bottom_x-small checkbox" type="checkbox"
+									 label="Yes, I am a league representative." 
+									 checked="{!v.objForm.bLegueRep}" />
+				</div>
+			</div>
+			
+			<div class="slds-grid slds-wrap">
+				<aura:if isTrue="{!v.errorMessages.length > 0}">
+					<c:X11_ErrorComponent sSeverity="{!v.errorMessageType}" sMessage="{!v.errorMessages}" />
+				</aura:if>
+				<aura:if isTrue="{!!empty(v.errorMessage)}">
+					<c:X11_ErrorComponent sSeverity="{!v.errorMessageType}" sMessage="{!v.errorMessage}" />
+				</aura:if>
+			</div>
+		
+			<div class="slds-grid slds-wrap slds-p-bottom_x-large slds-m-vertical_large btn-wrapper">
+				<lightning:button variant="base" label="CANCEL" title="CANCEL" class="cancel slds-col_bump-right"
+								  onclick="{!c.handleCancel}" />
+		
+				<lightning:button label="{!$Label.c.X11_Registration_Form_Field_BTN_Register}" variant="brand" class="slds-col_bump-left"
+								  onclick="{!c.register}" />
+			</div>
+        </div>
+    </div>
+	
+</aura:component>

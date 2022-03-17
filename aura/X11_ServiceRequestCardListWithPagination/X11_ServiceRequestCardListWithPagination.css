@@ -1,0 +1,92 @@
+.THIS.serviceRequestCard {
+    border: 1px solid #d6d4d6;
+    border-radius: 2px;
+    margin-bottom: 30px;
+    height: 211px;
+    max-height: 211px;
+    overflow: hidden;
+}
+.THIS .borderRight {
+    border-right: 1px solid #d6d4d6;
+}
+.THIS .serviceRequestImage {
+    width: 100%;
+    max-height: 210px;
+    background-color: #9bc4da;
+    image-orientation: from-image;
+    object-fit: cover;
+}
+.THIS .preHeader {
+    font-size: 10px;
+    color: #4a4a4a;
+}
+.THIS .preHeader > div {
+    display: inline-block;
+}
+.THIS .requestStatusColor {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+.THIS .requestStatusColor.new {
+    background: #ffe500;
+}
+.THIS .requestStatusColor.inProgress {
+    background: #00b388;
+}
+.THIS .requestStatusColor.closed {
+    background: #002d72;
+}
+.THIS .requestType {
+    color: #07344d;
+    line-height: 1.28;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.THIS .requestDescriptionHeading {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #07344d;
+    font-weight: bold;
+}
+.THIS .requestDescription {
+    color: #787072;
+    font-size: 13px;
+    font-weight: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 70px;
+}
+
+.THIS.serviceRequestCardPagination {
+    border-top: 1px solid #d6d4d6;
+    border-bottom: 1px solid #d6d4d6;
+}
+.THIS.serviceRequestCardPagination > * {
+    align-self: center;
+}
+.THIS.serviceRequestCardPagination .paginationButtons {
+    text-align: center;
+}
+.THIS.serviceRequestCardPagination .paginationButtons .paginationButton {
+    height: 32px;
+    width: 44px;
+    border: none;
+    margin: auto 5px;
+}
+.THIS.serviceRequestCardPagination .pageNumberDetails {
+    font-size: 12px;
+    color: #7a7a7a;
+    letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width: 767px) {
+    .THIS.serviceRequestCardPagination .pageNumberDetails {
+        display: none;
+    }
+}

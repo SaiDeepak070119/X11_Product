@@ -1,0 +1,35 @@
+<!--
+ ***************************************************************************************************************************************
+ * NAME   : X11_BaseSuperComponent
+ * DESCRIPTION  : Contains all the common methods
+ * @AUTHOR   : Abhishek Mishra
+ * @DATE   : 04-MAR-2019
+ * MODIFICATION LOG:  
+ * ______________________________________________________________________________________________________________________________________
+ * DEVELOPER                DATE                DESCRIPTION 
+ * ______________________________________________________________________________________________________________________________________
+ * Abhishek Misra           04-MAR-2019         Initial version    
+ ****************************************************************************************************************************************
+-->
+<aura:component extensible="true" implements="forceCommunity:availableForAllPageTypes" >
+    <aura:attribute name="isSpinnerActive" type="Boolean" default="false" access="Public" />
+    <aura:attribute name="lstErrorMessages" type="String[]"/>
+    <aura:attribute name="lstWarningMessages" type="String[]"/>
+    <aura:attribute name="selectedFileLst" type="List" default="[]"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+
+
+    <aura:if isTrue="{!v.isSpinnerActive}">
+        <div class="spinnercls" style="height:120%">
+            <!-- Spinner component -->
+            <c:X11_Spinner classType="brand"/>
+        </div>
+    </aura:if>  
+    <aura:if isTrue="{!v.lstErrorMessages.length >0}">
+    <!--    <c:X11_ErrorComponent lstMsgs="{!v.lstErrorMessages}" sSeverity="ERROR"/> -->
+    </aura:if>
+    <aura:if isTrue="{!v.lstWarningMessages.length >0}">
+        <c:X11_ErrorComponent lstMsgs="{!v.lstWarningMessages}" sSeverity="WARNING"/> 
+    </aura:if> 
+    {!v.body} 
+</aura:component>

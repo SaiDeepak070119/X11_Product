@@ -1,0 +1,33 @@
+<!--********************************************************************************************
+ * NAME         :  X11_RI_Details_YesNo
+ * DESCRIPTION  :  This is a part of Detail page (Yes No Question).
+ *
+ * @AUTHOR Samidha
+ * @DATE   26 April 2019
+ *
+ * MODIFICATION LOG:
+
+ * DATE        		DESCRIPTION
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ * 26 April 2019	Initial Creation
+
+ * Parent component: X11_RI_Details
+************************************************************************************************-->
+<aura:component >
+    <aura:attribute name="objCase" type="Object" default="{}" description="Object containing question to be displayed"/>
+    <aura:attribute name="detailsYesNoQuestion" type="String" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="selectedValue" type="String" default=""/>
+    <aura:attribute name="getBtnName" type="String" default=""/>
+    <aura:attribute name="whichButton" type="String" />
+	<aura:attribute name="detailsYesNoBtn" type="Boolean" default=""/>
+    <aura:registerEvent name="X11_RI_Details_QAEvent" type="c:X11_RI_Details_QAEvent"/>
+    
+    <div class="details-comp-wrapper">
+        <div class="question-text">{!v.detailsYesNoQuestion}</div>
+        <div class="yes-no-btn-wrapper">
+        	<lightning:button aura:id="yesBtn" class="yes-no-btn yes-btn" label="Yes"  name="yesBtn" onclick="{!c.yesNoAnswer}"/>
+            <lightning:button aura:id="noBtn" class="yes-no-btn" label="No"  name="noBtn" onclick="{!c.yesNoAnswer}"/>
+        </div>
+    	
+    </div>
+</aura:component>

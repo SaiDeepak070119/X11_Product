@@ -1,0 +1,38 @@
+<!--********************************************************************************************
+ * NAME         :  x11_RI_Details_MultipleOptions
+ * DESCRIPTION  :  This is a part of Detail page (Multiple Options).
+ *
+ * @AUTHOR Samidha
+ * @DATE   27 April 2019
+ *
+ * MODIFICATION LOG:
+
+ * DATE        		DESCRIPTION
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ * 27 April 2019 	Initial Creation
+
+ * Parent component: X11_RI_Details
+************************************************************************************************-->
+<aura:component >
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'Option 1', 'value': 'option1'},
+                                                        {'label': 'Option 2', 'value': 'option2'},
+                                                        {'label': 'Option 3', 'value': 'option3'},
+                                                        {'label': 'Option 4', 'value': 'option4'}                                                    
+                                                        ]"/>
+    <aura:attribute name="value" type="List" default=""/>
+    <aura:attribute name="detailsMultipleOptionsQuestion" type="String" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="optionsList" type="String" default="" description="Holds the options List values to be shown"/> 
+    <aura:attribute name="detailsMultipleOptionsAnswer" type="String" default="" description="Holds the answer of the text of the question to be displayed"/> 
+    <aura:registerEvent name="X11_RI_Details_QAEvent" type="c:X11_RI_Details_QAEvent"/>
+    <div class="details-comp-wrapper">
+        <div class="question-text">{!v.detailsMultipleOptionsQuestion}</div>
+        <lightning:checkboxGroup name="Checkbox Group" variant="label-hidden"
+                                 label=""
+                                 options="{! v.options }"
+                                 value="{! v.value }"
+                                 aura:id="multipleChoice"
+                                 onchange="{! c.handleChange }"/>
+        <lightning:button  class="continue-btn slds-m-top_medium" label="Continue" onclick="{! c.continueClick }" />
+    </div>
+</aura:component>

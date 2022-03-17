@@ -1,0 +1,17 @@
+<aura:component>
+    <aura:attribute name="detailsQuestion" type="datetime" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="detailsAnswer" type="datetime" default="" description="Holds the answer of the question displayed"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="errorMSG" type="String" default="" description="shows the error"/>
+    <aura:attribute name="todayDate" type="datetime" default="" description="Disabling date post today"/>
+    <aura:method name="verifyDate" action="{!c.verifyDate}"></aura:method>
+    
+    <div class="details-comp-wrapper">
+        <div class="question-text">{!v.detailsQuestion}</div>
+        <lightning:input aura:id="dtfieldId" class="POSD_FormLabel POSD_labelValueText" onchange="{!c.setMaxDate}" timeZone="{! $Locale.timezone }" type="datetime" value="{!v.detailsAnswer}" max="{!v.todayDate}" maxlength="32000"></lightning:input>
+        <aura:if isTrue="{!v.isInvalid}">
+            <span class="errorMsg">{!v.errorMSG}</span>
+        </aura:if>
+    </div>
+    
+</aura:component>

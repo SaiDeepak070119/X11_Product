@@ -1,0 +1,31 @@
+<aura:component>
+    
+    <aura:attribute name="allStages" type="List" default="non-linear" />
+    <aura:attribute name="lastSelectedStage" type="Integer" />
+    <aura:attribute name="selectedStageIdentifier" type="Integer" default="1" />
+
+    <div class="slds-grid" aura:id="statusbarId">
+        <ul class="slds-col slds-size_12-of-12 steps-container" aura:id="htimeline">
+            <aura:iteration items="{!v.allStages}" var="item" indexVar="index">
+                <li class="step-list">
+                    <div class="stephr-container">
+                        <a data-value="{!index+1}" href="#">
+                            <div>
+                                <div data-step-index="{!index+1}"
+                                    class="{!'step-holder ' + (v.selectedStageIdentifier == (index+1) ? 'active-step-holder' : '') + ((v.selectedStageIdentifier > (index+1)) || (v.lastSelectedStage > (index+1))? 'active-step-holder' : '')}">
+                                    <lightning:icon iconName="utility:check" alternativeText="check" />
+                                    <span class="indNum">{!index+1}</span>
+                                </div>
+                                <div data-step-index="{!index+1}"
+                                    class="{!'step-desc' + (v.selectedStageIdentifier == (index+1) ? 'active-step-desc' : '')}">
+                                    {!item}</div>
+                            </div>
+                        </a>
+                        <hr class="hr-line" />
+                    </div>
+                </li>
+            </aura:iteration>
+        </ul>
+    </div>
+
+</aura:component>

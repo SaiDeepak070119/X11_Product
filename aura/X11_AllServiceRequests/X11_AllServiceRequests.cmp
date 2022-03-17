@@ -1,0 +1,39 @@
+<aura:component>
+    
+    <aura:attribute name="caseConfigurationsByCategory" type="List" />
+    
+    <aura:registerEvent name="navigateToReportIssue" type="c:X11_E_NavigateToReportIssue" />
+
+    <div class="wrapper">
+        <div class="x11_home_header">
+            {!$Label.c.X11_AllServiceRequests}
+        </div>
+        
+        <div class="accordion-wrapper">
+            <aura:iteration items="{!v.caseConfigurationsByCategory}" var="category" indexVar="index">
+                <button class="x11_Accordion accordion-button" name="{!category.caseCategory}" onclick="{!c.openOrCloseAccordion}" data-id="{!index}">
+                    {!category.caseCategory}
+                    <lightning:icon class="img_dash" iconName="utility:dash" alternativeText="dash" />
+                    <lightning:icon class="img_add" iconName="utility:add" alternativeText="add" />
+                </button>
+                <div class="accordion-content">
+                    <aura:iteration items="{!category.caseConfigurations}" var="caseConfig">
+                        <div class="accordion-list-item" data-caseType="{!caseConfig.caseType}" 
+                             data-case-id="{!caseConfig.caseId}" onclick="{!c.navigateToReportIssuePage}">
+                            <div class="slds-p-right_small">
+                                <div class="x11_popular_title">{!caseConfig.caseType}</div>
+                                <div class="x11_popular_desc">{!caseConfig.caseDescription}</div>
+                                <div class="popular_timeHeader">{!$Label.c.X11_EstimatedTime}: {!caseConfig.caseEstimation}&nbsp;{!$Label.c.X11_Days}</div>
+                            </div>
+                            <div class="slds-grid slds-is-relative">
+                                <lightning:icon iconName="utility:chevronright" alternativeText="chevronright" />
+                                <lightning:icon iconName="utility:chevronright" class="slds-is-absolute iconchevron" alternativeText="chevronright" />
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </aura:iteration>
+        </div>
+    </div>
+    
+</aura:component>

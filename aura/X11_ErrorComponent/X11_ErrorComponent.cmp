@@ -1,0 +1,43 @@
+<!--
+ ***************************************************************************************************************************************
+ * NAME   : X11_BaseSuperComponent
+ * DESCRIPTION  : Shows error, warning, notification and success messages for single or list of messages
+ * @AUTHOR   : Abhishek Mishra
+ * @DATE   : 04-MAR-2019
+ * MODIFICATION LOG:  
+ * ______________________________________________________________________________________________________________________________________
+ * DEVELOPER                DATE                DESCRIPTION 
+ * ______________________________________________________________________________________________________________________________________
+ * Abhishek Misra           04-MAR-2019         Initial version    
+ ****************************************************************************************************************************************
+-->
+<aura:component 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" 
+                extends="c:X11_BaseSuperComponent">
+    <aura:attribute name="bShowMessage" type="Boolean"/>
+    <aura:attribute name="sTitle" type="String" />
+    <aura:attribute name="sSeverity" type="String" default="error"/>
+    <aura:attribute name="bClosable" type="Boolean" default="false"/>
+    <aura:attribute name="sIconName" type="String" default="utility:error"/>
+    <aura:attribute name="sIconSize" type="String" default="small"/>
+    <aura:attribute name="lstMsgs" type="String[]"/>
+    <aura:attribute name="sMessage" type="String"/>
+        
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+      <aura:if isTrue="{!v.bShowMessage}">
+          <ui:message severity="{!v.sSeverity}" closable="{!v.bClosable}">
+              <div class="slds-p-around_x-small">
+              <span><lightning:icon iconName="{!v.sIconName}" alternativeText="{!v.sTitle}" variant="{!v.sSeverity}" size="{!v.sIconSize}"/>&nbsp;&nbsp;<span class="slds-text-heading_medium slds-align-middle">{!v.sTitle}</span></span>
+              <aura:if isTrue="{!not(empty(v.lstMsgs))}">
+                  <aura:iteration var="sMsg" items="{!v.lstMsgs}" indexVar="sNo">
+                      <span class="slds-text-color_default">{!sNo + 1}. {!sMsg}</span>  <br/>
+                  </aura:iteration>
+              </aura:if> 
+              <aura:if isTrue="{!not(empty(v.sMessage))}"> 	
+                  <span class="slds-text-color_default"><aura:unescapedHtml value="{!v.sMessage}"/></span>
+              </aura:if>
+             </div>
+          </ui:message>
+        </aura:if>
+</aura:component>

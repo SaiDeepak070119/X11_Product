@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template">
+    <aura:attribute name="setHeader" type="Boolean"/>
+    <aura:attribute name="pageFrom" type="String"/>
+    <aura:attribute name="subHeader" type="String"/>
+    <aura:attribute name="mainHeader" type="String"/>
+</aura:event>

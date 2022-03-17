@@ -1,0 +1,39 @@
+<aura:component>
+    
+    <aura:attribute name="allCaseConfigurations" type="List" />
+    <aura:attribute name="searchKey" type="String" />
+    <aura:attribute name="searchResults" type="List" default="[]" />
+    
+    <aura:registerEvent name="navigateToReportIssue" type="c:X11_E_NavigateToReportIssue" />
+
+    <div class="slds-is-relative">
+        <lightning:input type="search" value="{!v.searchKey}"
+                         placeholder="{!$Label.c.X11_CaseTypeSearchPlaceholder}"
+                         variant="label-hidden"
+                         onchange="{!c.search}" />
+        
+        <aura:if isTrue="{!!empty(v.searchResults)}">
+            <div role="listbox" class="searchResults">
+                <ul class="slds-lookup__list" role="presentation">
+                    <aura:iteration items="{!v.searchResults}" var="result">
+                        <li class="slds-lookup__item slds-border_bottom slds-border_left slds-border_right">
+                            <a data-case-id="{!result.caseId}" role="option" onclick="{!c.navigateToReportIssuePage}">
+                                <div class="caseCategory">{!result.caseCategory}</div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_9-of-12 slds-medium-size_10-of-12 slds-p-right_small">
+                                        <div class="caseType">{!result.caseType}</div>
+                                        <div class="caseDescription">{!result.caseDescription}</div>
+                                    </div>
+                                    <div class="slds-col slds-size_3-of-12 slds-medium-size_2-of-12">
+                                        <div class="estimateTimeHeader">{!$Label.c.X11_EstimatedTime}</div>
+                                        <div class="caseEstimation">{!result.caseEstimation}&nbsp;{!$Label.c.X11_Days}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

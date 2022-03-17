@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Account</members>
+        <members>Amazon_S3_Credential__c</members>
+        <members>Case</members>
+        <members>Contact</members>
+        <members>LRC_AddressConfiguration__mdt</members>
+        <members>Question_Choice__c</members>
+        <members>Question_Type__c</members>
+        <members>Question__c</members>
+        <members>X11_Case_Config_Question__c</members>
+        <members>X11_Case_GIS_Layer__c</members>
+        <members>X11_Case_Metadata_Type__c</members>
+        <members>X11_Case_Question__c</members>
+        <members>X11_Configuration_GIS_Layers__c</members>
+        <members>X11_Error_Log__c</members>
+		<members>Document__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>X11_Case_Metadata_Type__c</members>
+        <members>X11_Case_Question__c</members>
+        <members>X11_Error_Log__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Account-Account Layout</members>
+        <members>Case-Case Layout</members>
+        <members>Contact-Contact Layout</members>
+        <members>X11_Case_Config_Question__c-Case Config_Question Layout</members>
+        <members>X11_Case_Config_Question__c-Case Questions Configuration Layout</members>
+        <members>X11_Case_GIS_Layer__c-Case GIS Layer Layout</members>
+        <members>X11_Case_Metadata_Type__c-Case Configuration Layout</members>
+        <members>X11_Case_Question__c-Case Question Layout</members>
+        <members>X11_Configuration_GIS_Layers__c-Configuration GIS Layer Layout</members>
+        <members>X11_Error_Log__c-Error Log Layout</members>
+		<members>Document__c-Document Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>CaseStatus</members>
+        <members>CaseType</members>
+        <name>StandardValueSet</name>
+    </types>
+    <types>
+        <members>ExifJavaScript</members>
+        <members>X11Community_PageHeaderImages</members>
+        <members>X11_CommunityHeader</members>
+        <members>X11_GlobalCSS</members>
+        <name>StaticResource</name>
+    </types>
+	<types>
+        <members>CustomLabels</members>
+        <name>CustomLabels</name>
+    </types>
+	<types>
+        <members>Einstein_GlobalConstants</members>
+        <members>FileUplaodAndSaveAsContentVersion</members>
+        <members>HttpFormBuilder</members>
+        <members>JWT</members>
+        <members>JWTBearerFlow</members>
+        <members>LRC_AddressAutoSelectionCtrl</members>
+        <members>LRC_Constants</members>
+        <members>Vision</members>
+        <members>X11Community_LoginController</members>
+        <members>X11Community_Registration_Ctrl</members>
+        <members>X11_CaseTrigger_Handler</members>
+        <members>X11_Case_DuplicateCheck</members>
+        <members>X11_Constants</members>
+        <members>X11_CustomRegistration_Ctrl</members>
+        <members>X11_EinsteinPrediction_Controller</members>
+        <members>X11_FAQArticles</members>
+        <members>X11_HomePageController</members>
+        <members>X11_RI_ParentController</members>
+        <members>X11_Utility</members>
+        <members>X11_ViewServiceRequestsController</members>
+        <members>X11_sObjectInstanceCreater</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>GoogleMapPage</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>X11_CaseMasterTrigger</members>
+        <name>ApexTrigger</name>
+    </types>
+	<types>
+        <members>AWSFileUploadEvent</members>
+        <members>FileUploadCmp</members>
+        <members>FileUploadEvent</members>
+        <members>GoogleMapAddresChange</members>
+        <members>GoogleMapCmp</members>
+        <members>PopulatAddresOnParent</members>
+        <members>SendUploadedFileDataToParent</members>
+        <members>X11Community_Footer</members>
+        <members>X11Community_Header</members>
+        <members>X11Community_Home</members>
+        <members>X11Community_PageHeader</members>
+        <members>X11Community_Theme</members>
+        <members>X11Community_ViewServiceRequests</members>
+        <members>X11_AllServiceRequests</members>
+        <members>X11_BaseComponent</members>
+        <members>X11_BaseSuperComponent</members>
+        <members>X11_CaseTypeSearch</members>
+        <members>X11_CustomRegistrationComponent</members>
+        <members>X11_E_NavigateToReportIssue</members>
+        <members>X11_E_ServiceRequestCardEvent</members>
+        <members>X11_ErrorComponent</members>
+        <members>X11_FAQArticlesCmp</members>
+        <members>X11_PopularServiceRequests</members>
+        <members>X11_Popup</members>
+        <members>X11_RI_ContactInformation</members>
+        <members>X11_RI_Details</members>
+        <members>X11_RI_Details_Date_Time</members>
+        <members>X11_RI_Details_Dropdown</members>
+        <members>X11_RI_Details_LongText</members>
+        <members>X11_RI_Details_QAEvent</members>
+        <members>X11_RI_Details_ShortText</members>
+        <members>X11_RI_Details_SingleChoice</members>
+        <members>X11_RI_Details_YesNo</members>
+        <members>X11_RI_RequestReview</members>
+        <members>X11_RI_StatusBar</members>
+        <members>X11_RI_StatusBarEvent</members>
+        <members>X11_RI_Submit</members>
+        <members>X11_ServiceRequestCard</members>
+        <members>X11_ServiceRequestCardListWithPagination</members>
+        <members>X11_Spinner</members>
+        <members>defaultTokens</members>
+        <members>testEvent</members>
+        <members>x11_RI_Details_MultipleOptions</members>
+        <name>AuraDefinitionBundle</name>
+    </types>
+    <version>50.0</version>
+</Package>

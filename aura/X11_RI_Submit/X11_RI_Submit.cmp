@@ -1,0 +1,144 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" 
+                controller="X11_RI_ParentController"
+                extends="c:X11_BaseSuperComponent">
+    <aura:attribute name="sCaseNumber" type="String" />
+    <aura:attribute name="bLogin" type="Boolean" default="false"/>
+    <aura:attribute name="sContactId" type="String"/>
+    <aura:attribute name="sConfirmPassword" type="String"/>
+    <aura:attribute name="sPassword" type="String"/>
+    <aura:attribute name="objCaseConfig" type="Object"/>
+    <aura:attribute name="bIsPswrdMatch" type="Boolean"/>
+    <aura:attribute name="mapLabels" type="Map" />
+    <aura:attribute name="objCase" type="Case"/>
+    <aura:attribute name="userExist" type="Boolean"/> 
+    <aura:attribute name="objContact" type="Object" />
+    <aura:attribute name="isAnonymous" type="Boolean" default="false"/>
+    <aura:attribute name="currentUserId" type="String" default="false"/>
+    
+    <aura:attribute name="bEmailOptIn" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="X11_RI_StatusBarEvent" type="c:X11_RI_StatusBarEvent"/>
+    <div class="lightning-compAligns">
+    <div class="">
+       <aura:if isTrue="{!v.currentUserId == true || v.isAnonymous==true}">  <!---->
+            <div class="request-text" > Thank you!</div>
+            
+                <div class="track-text">Your request has been submitted. Your request number is <div class="slds-text-title_bold request-number">{!v.sCaseNumber}</div>.</div>
+                 <aura:if isTrue="{!v.isAnonymous==false}" >
+                <div class="slds-grid PRA-reqBtns">
+                     <lightning:button  class="continue-btn slds-m-top_medium" label="NEW REQUEST"  name="{!objCaseConfig}" onclick="{!c.redirectToHome}" />
+					 <lightning:button  class="continue-btn slds-m-top_medium" label="VIEW MY REQUESTS"  name="{!objCaseConfig}" onclick="{!c.redirectToAccount}" />
+                </div>   
+                
+        	</aura:if>
+            </aura:if>
+       <aura:if isTrue="{!v.objContact.bIsLogin == false &amp;&amp; v.isAnonymous==false}">
+            
+            <aura:if isTrue="{!v.userExist &amp;&amp; v.currentUserId==false}"> 
+			    <div class="request-text" > Thank you!</div>
+                <div class="track-text">Your request has been submittted. Your request number is <div class="slds-text-title_bold request-number">{!v.sCaseNumber}</div>.</div>
+                <div class="track-text">Log in to your account to view your request.</div>
+	
+                <lightning:card class="submit-login">
+                        <div class="info-wrapper-col">
+                    <div class="info-wrapper">
+                    	<div class="label-text">USERNAME</div>
+                        <div class="value-text">{!v.objContact.sEmail}</div>
+                    </div>
+                </div>
+                <div class="info-wrapper-col">
+                    <div class="info-wrapper">
+                         <lightning:input type="password" aura:id="idPassword" label="PASSWORD"
+                                 name="sPassword"
+                                 title="Password must be of minimum 8 characters and must contain one Alphabet, One Number and one Special Character"
+                                 class="label-text"
+                                 value="{!v.sPassword}"
+                                 required="true"/> 
+                        
+                    </div>
+                </div>
+                    <aura:if isTrue="{!v.bLogin}">
+                                <div>{!v.mapLabels.sLoginIssue}</div>
+                        </aura:if>
+                </lightning:card> 
+               
+                 <div class="slds-grid PRA-reqBtns">
+                <lightning:button  class="continue-btn" label="LOGIN"  name="Log IN" onclick="{!c.signInPage}"/>
+                <lightning:button  class="continue-btn" label="RESET PASSWORD"  name="RESET PASSWORD" onclick="{!c.reset_Password}"/>
+                </div>
+                
+            </aura:if> 
+            <aura:if isTrue="{!v.userExist == false &amp;&amp; v.currentUserId==false &amp;&amp; v.isAnonymous==false}"> 
+                <!--<div class="request-text" >Request no.<div class="slds-text-title_bold request-number">{!v.sCaseNumber}</div> has been submitted!</div>-->
+                 <div class="request-text" >Thank you!</div>
+                <div class="track-text">Your request has been submitted. Your request number is <div class="slds-text-title_bold request-number">{!v.sCaseNumber}</div>.</div> 	
+                <aura:if isTrue="{!v.objContact.sLastName!=null &amp;&amp; v.objContact.sFirstName !=null &amp;&amp; v.objContact.sEmail !=null}">
+                    
+                <div class="track-text">Create an account to track your requests in one place.</div>
+                <lightning:card class="submit-register">
+                    <!-- <div class=""> -->
+                            <div class="info-wrapper-col">
+                                    <div class="info-wrapper">
+                                            <div class="label-text">Name</div>
+                                            <div class="value-text">{!(v.objContact.sFirstName + ' ' + v.objContact.sLastName)}</div>
+                                        </div>
+                                        
+                                        <div class="info-wrapper">
+                                            <div class="label-text">Phone</div>
+                                            <div class="value-text">{!v.objContact.sPhone}</div>
+                                        </div>
+                                        
+                                        <div class="info-wrapper">
+                                            <div class="label-text">Address</div>
+                                            <div class="value-text">{!v.objContact.sAddress}</div>
+                                        </div>
+                            </div>
+                            <div class="info-wrapper-col">
+                                    <div class="info-wrapper">
+                                            <div class="label-text">Username</div>
+                                            <div class="value-text">{!v.objContact.sEmail} </div>
+                                        </div>   
+                                        
+                                        <div class="info-wrapper">
+                                            <lightning:input type="password" class="password label-text" aura:id="idPassword" label="Password"
+                                                             name="sPassword"
+                                                             title="Your password must contain a minimum of 8 total characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character (!@#$%.^)."
+                                                             pattern="^(?=.*[A-Z])(?=.*[!@#$*\^%\*\.])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+                                                             value="{!v.sPassword}"
+                                                             messageWhenPatternMismatch="Your password must contain a minimum of 8 total characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character (!@#$%.^)."
+                                                             required="true"/> 
+                                        </div>
+                                        
+                                        <div class="info-wrapper">
+                                            <lightning:input type="password" class="confirm-password label-text" aura:id="idPassword" label="Confirm Password"
+                                                             name="sConfirmPassword"
+                                                             value="{!v.sConfirmPassword}"
+                                                             required="true"/>
+                                        </div> 
+                                        <div class="info-wrapper proEmailCheckbox">
+                                            <lightning:input type="checkbox" label="I want to opt into promotional emails from the Port of San Diego." aura:id="idemailOptIn"
+                                                             name="emailOptIn" checked="{!v.bEmailOptIn}"
+                                                             required="false"/>
+                                    
+                                        </div>
+                            </div>
+                    <!-- </div> -->
+                </lightning:card>
+                 <div class="Registerbtn">
+                    <lightning:button class="slds-m-top_medium continue-btn CreateMyAccBtn" label="Register" variant="brand" onclick="{!c.verifyDetails}" />
+                </div>
+                </aura:if>
+               
+                </aura:if>    
+             
+             <aura:if isTrue="{!v.userExist == false &amp;&amp; v.currentUserId==false &amp;&amp; v.isAnonymous==true}"><!---->
+                 <div class="request-text" >Request no.<div class="slds-text-title_bold request-number">{!v.sCaseNumber}</div> has been submitted!</div>
+             </aura:if>     
+        </aura:if>
+        
+    </div>   
+    </div>
+
+    </aura:component>

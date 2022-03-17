@@ -1,0 +1,29 @@
+<!--********************************************************************************************
+ * NAME         :  X11_RI_Details_LongText
+ * DESCRIPTION  :  This is a part of Detail page (LongText).
+ *
+ * @AUTHOR Samidha
+ * @DATE   28 April 2019
+ *
+ * MODIFICATION LOG:
+
+ * DATE        		DESCRIPTION
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ * 28 April 2019 	Initial Creation
+
+ * Parent component: X11_RI_Details
+************************************************************************************************-->
+<aura:component>
+    <aura:attribute name="detailsQuestion" type="String" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="detailsAnswer" type="String" default="" description="Holds the answer of the text question displayed"/>
+    <aura:attribute name="errorMSG" type="String" default="" description="shows the error"/>
+    <aura:attribute name="isRequired" type="Boolean" default="false" description="if questions is mandatory this will be true"/>
+    <aura:attribute name="isInvalid" type="Boolean" default="false" access="global"/>
+    <aura:method name="verifyRequired" action="{!c.verifyRequired}"></aura:method>
+    
+    <div class="details-comp-wrapper">
+        <div class="question-text"><span style="color: rgb(194, 57, 52);">*</span>{!v.detailsQuestion}</div>
+        <lightning:textarea class="long-answer-text"  required = "true" value="{!v.detailsAnswer}" placeholder="Please provide all relevant details as you describe your request." maxlength="32000" ></lightning:textarea>
+    </div>
+    
+</aura:component>

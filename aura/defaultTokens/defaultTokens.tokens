@@ -1,0 +1,30 @@
+<aura:tokens extends="force:base">
+    <!-- /* Color Codes */ -->
+    <aura:token name="darkBlue" value="#006298"/>
+    <aura:token name="white" value="#ffffff"/>
+    <aura:token name="gray" value="#807e83"/>
+    <aura:token name="orange" value="#f05d21"/>
+    <aura:token name="lightBlue" value="#01a8cb"/>
+    <aura:token name="offWhite" value="#f5f1ea"/>
+    <aura:token name="lightGray" value="#cccccc"/>
+    <aura:token name="darkGray" value="#58575a"/>
+    <aura:token name="lightestGray" value="#d7d7d7"/>
+    <aura:token name="SelectionGray" value="#4a4a4a"/>
+    <aura:token name="yellow" value="#ffe500"/>
+    
+    <!-- /* Font Weight */ -->
+    <aura:token name="fontLight" value="light"/>
+    <aura:token name="fontRegular" value="regular"/>
+    <aura:token name="fontBold" value="bold"/>
+    
+    <!-- /* Font Size */ -->
+    <aura:token name="font36px" value="2.25rem"/>
+    <aura:token name="font18px" value="1.125rem"/>
+    <aura:token name="font1rem" value="1rem"/>
+    <aura:token name="fontpt5rem" value="0.5rem"/>
+    <aura:token name="fontpt8rem" value="0.8rem"/>
+    <aura:token name="fontpt75rem" value="0.75rem"/>
+    <aura:token name="font15px" value="0.938rem"/>
+    
+    
+</aura:tokens>

@@ -1,0 +1,35 @@
+<aura:component implements="lightning:actionOverride,forceCommunity:availableForAllPageTypes" access="global" 
+                controller="X11_HomePageController"
+                extends="c:X11_BaseComponent">
+	
+    <aura:attribute name="isPortalUser" type="Boolean" default="true" />
+    <aura:attribute name="allCaseConfigurations" type="List" />
+    <aura:attribute name="caseConfigurationsByCategory" type="List" />
+    <aura:attribute name="popularCaseConfigurations" type="List" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <lightning:navigation aura:id="navService" />
+    <aura:handler name="navigateToReportIssue" event="c:X11_E_NavigateToReportIssue" action="{!c.navigateToReportIssue}" />
+    
+    <c:X11Community_PageHeader backgroundOverlay="false" />
+    
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+            <div class="x11_search_case_type">
+                <c:X11_CaseTypeSearch allCaseConfigurations="{!v.allCaseConfigurations}" />
+            </div>
+        </div>
+    </div>
+    
+    <div class="slds-grid slds-grid_align-center slds-m-bottom_xx-large">
+        <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+            <c:X11_PopularServiceRequests popularCaseConfigurations="{!v.popularCaseConfigurations}" />
+        </div>
+    </div>
+    
+    <div class="slds-grid slds-grid_align-center slds-p-vertical_xx-large x11_all_service_requests">
+        <div class="slds-col slds-size_11-of-12 slds-large-size_10-of-12">
+            <c:X11_AllServiceRequests caseConfigurationsByCategory="{!v.caseConfigurationsByCategory}" />
+        </div>
+    </div>
+</aura:component>

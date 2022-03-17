@@ -1,0 +1,18 @@
+.THIS .x11_search_case_type {
+    padding: 50px;
+    background: #fff;
+    position: relative;
+    top: -50%;
+    -webkit-box-shadow: 0 8px 6px -6px #e4e4e4;
+    -moz-box-shadow: 0 8px 6px -6px #e4e4e4;
+    box-shadow: 0 8px 6px -6px #e4e4e4;
+}
+
+.THIS.x11_all_service_requests {
+    background: #f2faff;
+}
+@media only screen and (max-width: 767px) {
+    .THIS .x11_search_case_type {
+        padding: 50px 10px;
+    }
+}

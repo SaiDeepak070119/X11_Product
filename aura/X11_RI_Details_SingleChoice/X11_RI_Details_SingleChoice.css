@@ -1,0 +1,20 @@
+.THIS .yes-no-wrapper .slds-radio + .slds-radio{
+    margin-top:1rem;
+}
+.THIS .yes-no-wrapper{
+    flex-direction: column;
+}
+
+.THIS .yes-no-wrapper .slds-radio__label{
+    display:flex;
+}
+
+.THIS .yes-no-wrapper .slds-radio:hover{
+    border-color: t(darkBlue);
+    cursor: pointer;
+    background:t(offWhite);
+}
+.THIS .yes-no-wrapper .slds-radio__label:hover{
+    cursor: pointer;
+    background:t(offWhite);
+}

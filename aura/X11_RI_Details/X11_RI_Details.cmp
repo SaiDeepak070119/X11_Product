@@ -1,0 +1,150 @@
+<aura:component extends="c:X11_BaseSuperComponent">
+    
+    <aura:attribute name="isPortalUser" type="String" />
+    <aura:attribute name="isAnonymous" type="Boolean" default="false" />
+    <aura:attribute name="mapSelect" type="Boolean" default="false"/>
+    <aura:attribute name="objCaseConfig" type="Object" />
+    <aura:attribute name="objCase" type="Case" />
+    <aura:attribute name="showCancelPopup" type="Boolean" default="true" />
+    <aura:attribute name="selectedFileLst" type="List" />
+    <aura:attribute name="ischecked" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:attribute name="caseTypeLst" type="List"/>
+    <aura:attribute name="populateselectedMapValues" type="Map" />
+    
+    <aura:attribute name="mapOptions" type="Object" default='{"zoom": 15}' />
+	<aura:attribute name="mapOptionsCenter" type="Object" />
+	<aura:attribute name="mapData" type="Object[]" />
+	<aura:attribute name="boundsCheck" type="Boolean" default="false" />
+    <aura:attribute name="mapError" type="Boolean" default="false" />
+	<aura:attribute name="selectedMapValues" type="Map" />
+    
+    <aura:attribute name="predictedCaseType" type="String"/>
+    <aura:attribute name="locationMapCenter" type="Object"/>
+    <aura:attribute name="isLocationIdentifiedFromImage" type="Boolean" default="false" />
+    
+    <aura:handler name="X11_RI_Details_QAEvent" event="c:X11_RI_Details_QAEvent" action="{!c.setAnswerOptions}" />
+    <aura:handler name="FileUploadEvent" event="c:FileUploadEvent" action="{!c.setFileData}"/>
+    <aura:registerEvent name="SendUploadedFileDataToParent" type="c:SendUploadedFileDataToParent"/>
+    <aura:handler name="GoogleMapAddresChange" event="c:GoogleMapAddresChange" action="{!c.getMapDataFromChildCmp}" />
+
+	<aura:registerEvent name="PopulatAddresOnParent" type="c:PopulatAddresOnParent"/>
+    
+    <!--aura:registerEvent name="moveToSection" type="c:X11_RI_StatusBarEvent" /-->
+    <aura:registerEvent name="X11_RI_StatusBarEvent" type="c:X11_RI_StatusBarEvent"/>
+    <div class="slds-grid slds-wrap Posd-compAligns">
+        <div class="details-wrapper">     
+            <div class="slds-grid slds-gutters posd_reqUpload"> 
+                <div class="slds-col">
+                    <c:FileUploadCmp uploadedFileData="{!v.selectedFileLst}" 
+                                     predictedCaseType="{!v.predictedCaseType}" 
+                                     locationMapCenter="{!v.locationMapCenter}"
+                                     isLocationIdentifiedFromImage="{!v.isLocationIdentifiedFromImage}"/>
+                </div>
+                <div class="slds-col">
+                    <lightning:combobox class="display_label" name="CASE CATEGORY" label="CASE CATEGORY" value="{!v.objCase.Type}" options="{! v.caseTypeLst }" onchange="{! c.handleChangeCaseType }"/>
+                    <!--c:X11_RI_Details_Dropdown detailsQuestion="Case Type" detailsAnswer="{!v.objCase.Type}" options="{!v.caseTypeLst}"/-->
+                    
+                    <aura:iteration items="{!v.objCaseConfig.lstCaseQuestion}" var="objCaseQuestion">
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Boolean'}">           
+                            <c:X11_RI_Details_YesNo detailsYesNoQuestion="{!objCaseQuestion.sQuestion}" selectedValue="{!objCaseQuestion.sAnswer}"/>
+                        </aura:if>          
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Checkbox'}">           
+                            <c:x11_RI_Details_MultipleOptions detailsMultipleOptionsQuestion="{!objCaseQuestion.sQuestion}" detailsMultipleOptionsAnswer="{!objCaseQuestion.sAnswer}"
+                                                              options="{!objCaseQuestion.lstOptions}"/>
+                        </aura:if>                                    
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Picklist'}">
+                            <c:X11_RI_Details_Dropdown isRequired="{!objCaseQuestion.brequired}" errorMSG="{!$Label.c.MandatoryCheck}" aura:id="genericIdforAll" isInvalid="false"
+                                                       detailsQuestion="{!objCaseQuestion.sQuestion}" detailsAnswer="{!objCaseQuestion.sAnswer}" options="{!objCaseQuestion.lstOptions}"/>
+                        </aura:if>                              
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Radio'}">
+                            <c:X11_RI_Details_SingleChoice detailsSingleChoiceQuestion="{!objCaseQuestion.sQuestion}" value="{!objCaseQuestion.sAnswer}" options="{!objCaseQuestion.lstOptions}"/>
+                        </aura:if>                                 
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Text'}">
+                            <c:X11_RI_Details_ShortText errorMSG="{!$Label.c.MandatoryCheck}" aura:id="genericIdforAll" isInvalid="false"
+                                                        isRequired="{!objCaseQuestion.brequired}" detailsQuestion="{!objCaseQuestion.sQuestion}" detailsAnswer="{!objCaseQuestion.sAnswer}"/>
+                        </aura:if>                             
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'TextArea'}">
+                            <c:X11_RI_Details_LongText errorMSG="{!$Label.c.MandatoryCheck}" aura:id="genericIdforAll" isInvalid="false" isRequired="{!objCaseQuestion.brequired}"
+                                                       detailsQuestion="{!objCaseQuestion.sQuestion}" detailsAnswer="{!objCaseQuestion.sAnswer}"  />
+                        </aura:if>                              
+                        <aura:if isTrue="{!objCaseQuestion.sQuestionType == 'Date/Time'}">
+                            <c:X11_RI_Details_Date_Time errorMSG="{!$Label.c.MandatoryCheck}" aura:id="dateTimeFieldId" isInvalid="false" detailsQuestion="{!objCaseQuestion.sQuestion}"
+                                                        detailsAnswer="{!objCaseQuestion.sAnswer}" todayDate="{!v.todayDate}"/>
+                        </aura:if>                               
+                    </aura:iteration>                           
+                </div>    
+            </div>
+            
+            <div class="btn-wrapper">                        
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-is-relative">
+                        <div class="location-container">
+                            <p class="header subheader"><span style="color: rgb(194, 57, 52);">*</span>LOCATION OF ISSUE</p>
+                        </div>
+                        
+                        <div style="color:red;" aura:id="errorId" class="{!v.mapError ? 'slds-show' : 'slds-hide'}">Please select a location.</div>
+                        
+                        <c:GoogleMapCmp isPortalUser="{!v.isPortalUser}" 
+                                        mapOptions="{!v.mapOptions}"
+                                        mapOptionsCenter="{!v.mapOptionsCenter}" 
+                                        mapData="{!v.mapData}"/>
+                    </div>
+                    <!--c:X11_RI_Location isPortalUser="{!v.isPortalUser}" 
+                                       objCase="{!v.objCase}"
+                                       selectedMapValues="{!v.populateselectedMapValues}"
+                                       mapSelect="{!v.mapSelect}"
+                                       mapOptionsCenter="{!v.locationMapCenter}"
+                                       isLocationIdentifiedFromImage="{!v.isLocationIdentifiedFromImage}"/-->
+                </div>
+            </div>
+            
+            <div class="btn-wrapper">                        
+                <div class="slds-grid slds-wrap">                
+                    <div class="slds-col slds-large-size_6-of-12">                 
+                        <div class="slds-grid">             
+                            <!--div>         
+                            <lightning:button class="continue-btn" label="BACK" onclick="{!c.backButtonClickHandler}"/> 
+                        </div-->
+                            <div><!-- class="slds-m-left_large" -->
+                                <lightning:button label="CANCEL" title="CANCEL" onclick="{!c.cancelButtonClickHandler}"/> <!-- Removed variant="base"  class="cancel-btn" -->
+                            </div>                             
+                        </div>                              
+                    </div>                              
+                    <div class="slds-col slds-large-size_6-of-12">                             
+                        <div class="slds-float_right">                              
+                            <lightning:button class="review-btn" label="NEXT" variant="brand"
+                                              onclick="{!c.nextButtonClickHandler}"/>                
+                        </div>        
+                    </div>         
+                </div>     
+            </div>       
+        </div>  
+    </div>
+    
+    <!--aura:if isTrue="{!v.showCancelPopup}">
+		<c:cancelParkEventPopup isPortalUser="{!v.isPortalUser}" isopen="{!v.showCancelPopup}" 
+								onclose="{!c.closeCancelPopup}" is311="true" />
+	</aura:if-->
+    
+    <div class="cancel-btn-wrapper">                               
+        <lightning:button variant="base" label="CANCEL" title="CANCEL" class="cancel-btn"             
+                          onclick="{!c.cancelButtonClickHandler}"/>   
+    </div> 
+
+    <div class="breadcrumb-container">                                          
+        <div class="breadcrumb-wrap sticky-breadcrumb">                                      
+            <div class="back-btn" name="backbtn">            
+                <lightning:icon iconName="utility:back" alternativeText="BACK" variant="inverse" size="small" onclick="{!c.backButtonClickHandler}"/>
+            </div>    
+            <div class="page-wrap">
+                <div class="page-num" name="pageNumber">2</div>
+                <div class="page-name" name="pageName">Details</div>
+            </div>
+            <div class="next-btn" name="next" onclick="{!c.nextButtonClickHandler}">
+                <lightning:icon iconName="utility:forward" alternativeText="forward" variant="inverse" size="small" onclick="{!c.continueCreation}"/>
+            </div>                    
+        </div>                        
+    </div>    
+</aura:component>

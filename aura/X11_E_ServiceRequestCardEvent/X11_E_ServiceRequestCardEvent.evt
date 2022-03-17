@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="serviceRequest" type="Object" />
+    <aura:attribute name="amazonsetting" type="Map"/>
+</aura:event>

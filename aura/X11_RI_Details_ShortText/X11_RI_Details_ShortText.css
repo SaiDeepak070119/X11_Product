@@ -1,0 +1,36 @@
+.THIS .short-answer-text .slds-input{
+    border:1px solid t(lightGray);
+    font-size:12px;
+    color:t(SelectionGray);
+    border-radius:4px;
+    height:40px;
+    width:420px;
+}
+.THIS .short-answer-text .slds-input::placeholder{
+    color:#a39b9d;
+    font-size:12px;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: normal;
+}
+.THIS .errorMsg{
+    color:red;
+    margin-top: 3px;
+}
+.THIS .short-answer-text .slds-input::placeholder{
+    color:#a39b9d;
+    font-size:12px;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: normal;
+}
+
+.THIS.details-comp-wrapper {
+    margin-bottom: 30px;
+}
+.THIS .short-answer-text .slds-input{
+    border:1px solid t(lightGray);
+    font-size:12px;
+    color:t(SelectionGray);
+    border-radius:4px;
+    height:40px;
+    width:420px;
+}

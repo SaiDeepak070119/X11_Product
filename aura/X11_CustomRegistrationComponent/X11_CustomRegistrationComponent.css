@@ -1,0 +1,39 @@
+.THIS label.slds-form-element__label,
+.THIS .checkbox .slds-form-element__label {
+	color: #07344d;
+	font-size: 12px;
+}
+.THIS input.slds-input {
+	border-radius: 2px;
+	border-color: #d7d7d7;
+}
+.THIS button.slds-button {
+	border-radius: 3px;
+	border: 0;
+	width: 120px;
+	height: 40px;
+	text-transform: uppercase;
+}
+
+.THIS button.slds-button.cancel {
+	width: auto;
+}
+.THIS .slds-form-element__help {
+	text-transform: none;
+	font-weight: normal;
+}
+.THIS .cancel {
+	color: #a39b9d;
+	background: none !important;
+	text-align: left;
+}
+@media (max-width: 480px) {
+	.THIS .slds-gutters_direct-xx-large {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	.THIS .slds-gutters_direct-xx-large > .slds-col {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}

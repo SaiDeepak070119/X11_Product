@@ -1,0 +1,128 @@
+.THIS.slds-box{
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: 300;
+    height: 324px;
+    margin-bottom: 30px;
+    border: 1px solid #d6d4d6;
+    padding: 0;
+}
+.THIS.posd-headerUpload {
+    margin: 11px 0;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: bold;
+    font-size: 12px;
+}
+.THIS .upload_btn lightning-primitive-icon,
+.THIS .upload_btn .slds-form-element__label {
+    display: none;
+}
+.THIS .upload_btn .slds-form-element {
+    display: flex;
+    justify-content: center;
+    padding-top: 49px;
+    flex-direction: column;
+    align-items: center;
+}
+.THIS .upload-text {
+    text-align: center;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: 300;
+    font-size: 16px;
+}
+.THIS .selFile {
+    position: relative;
+    padding-right: 30px;
+}
+.THIS .selFile a{
+    position: absolute;
+    left: 51px;
+    top: -13px;   
+}
+.THIS .selFile img{
+    width: 60px;
+    height:60px;
+    max-width: none;
+}
+.THIS .selFile lightning-icon:not(.slds-icon-utility-close) svg {
+    width: 60px;
+    height: 60px;
+}
+.THIS .fileType {
+    text-align: center;
+    padding-top: 10px;
+    font-size: 12px;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: 300;
+}
+.THIS .upload-file {
+    height: 100%;
+}
+
+.THIS .upload_btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: 'Gotham A', 'Gotham B';
+    font-weight: 300;
+    height: 100%;
+}
+.THIS .uploadPRA, .THIS .uploadCase {
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    bottom: 80px;
+}
+.THIS .uploadPRA .slds-has-error:after {
+    content: 'Supported file types are DOC, DOCX, XLS, XLSX, PNG, JPG, or PDF. Please select another file.';
+    color: rgba(214, 5, 1, 1);
+    padding-top: 18px;
+    text-align: center;
+}
+.THIS .uploadError {
+    color: rgba(214, 5, 1, 1);
+    text-align: center;
+}
+.THIS .uploadFileWrapper {
+	position: absolute;
+    width: 420px;
+    margin-top: 65px;
+}
+.THIS .dropZoneContainer {
+    position: relative;
+}
+.THIS .FileUpload {
+    width: 100%;
+    height: 324px;
+    opacity: 0;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+.THIS .dropZoneIcon {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    height: 240px;
+    background-image: url(/resource/POSD_Images1/PoSD_Upload-Icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 17%;
+}
+@media screen and (max-width: 768px) { 
+    .THIS .uploadFileWrapper {
+        width: calc(100% - 220px);
+    }
+    .THIS .selFile {
+        padding-right: 11px;
+        padding-top: 20px;
+    }
+    .THIS .selFile a {
+		top: 5px;
+    }
+    .THIS.slds-box {
+        margin-bottom: 0;
+    }
+    .THIS .dropZoneIcon {
+	    background-size: 20%;
+	}
+}

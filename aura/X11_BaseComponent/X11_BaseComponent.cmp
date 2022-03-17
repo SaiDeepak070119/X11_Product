@@ -1,0 +1,12 @@
+<aura:component extensible="true">
+	
+    <aura:attribute name="isUserLoggedIn" type="Boolean" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <lightning:spinner variant="brand" size="large" 
+                       class="slds-hide" aura:id="spinner" />
+    
+    {!v.body}
+    
+</aura:component>

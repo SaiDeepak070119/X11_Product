@@ -1,0 +1,93 @@
+<aura:component>
+	<ltng:require scripts="{!$Resource.X11_aws_sdk}" />
+    <aura:attribute name="serviceRequest" type="Object" />
+    <aura:attribute name="mapMarkers" type="Object" />
+    <aura:attribute name="currentImageSlideIndex" type="Integer" default="0" />
+    <aura:attribute name="amazonsetting" type="Map"/>
+    <aura:attribute name="imageDataUrlList" type="List"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler name="change" value="{!v.serviceRequest}" action="{!c.init}" />
+
+    <div class="serviceRequestCardWrapper slds-grid slds-grid_align-center slds-gutters">
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-m-bottom_x-large">
+            <article class="slds-card slds-p-vertical_large slds-p-horizontal_x-large">
+                <h2 class="title">DETAILS</h2>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">REQUEST ID</div>
+                    <div class="value-text">{!v.serviceRequest.caseObj.CaseNumber}</div>
+                </div>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">REQUEST TYPE</div>
+                    <div class="value-text">{!v.serviceRequest.caseObj.Type}</div>
+                </div>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">REQUEST STATUS</div>
+                    <div class="value-text">{!v.serviceRequest.caseObj.Status}</div>
+                </div>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">REQUEST DATE</div>
+                    <div class="value-text">
+                        <lightning:formattedDateTime value="{!v.serviceRequest.caseObj.CreatedDate}" 
+                                                        year="numeric" day="2-digit" month="long" hour="2-digit" minute="2-digit" />
+                    </div>
+                </div>
+                <aura:if isTrue="{!v.serviceRequest.caseObj.Status == 'Closed'}">
+                    <div class="slds-m-top_x-large">
+                        <div class="label-text">ClOSED DATE</div>
+                        <div class="value-text">
+                            <lightning:formattedDateTime value="{!v.serviceRequest.caseObj.ClosedDate}" year="numeric"
+                                                            day="2-digit" month="long" hour="2-digit" minute="2-digit" />
+                        </div>
+                    </div>
+                </aura:if>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">ADDRESS</div>
+                    <div class="value-text">{!v.serviceRequest.caseObj.Street_Address__c}</div>
+                </div>
+                <div class="slds-m-top_x-large">
+                    <div class="label-text">DESCRIPTION</div>
+                    <div class="value-text">{!v.serviceRequest.caseObj.sDescription}</div>
+                </div>
+            </article>
+        </div>
+
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-m-bottom_x-large">
+            <article class="slds-card slds-p-vertical_large slds-p-horizontal_x-large">
+                <h2 class="slds-m-bottom_x-large title">PHOTOS</h2>
+                <div class="image-wrapper">
+                    <aura:if isTrue="{!v.serviceRequest.urlsList.length != 0}">
+                        <aura:iteration items="{!v.serviceRequest.urlsList}" var="imageUrl">
+                            <img class="service-request-image" src="{!'/sfc/servlet.shepherd/version/download/' + imageUrl.Id}" />
+                        </aura:iteration>
+                    </aura:if>
+                    <aura:if isTrue="{!v.serviceRequest.attachurlsList.length > 0}">
+                        <aura:iteration items="{!v.serviceRequest.attachurlsList}" var="imageUrl">
+                            <img class="service-request-image" src="{!'/servlet/servlet.FileDownload?file=' + imageUrl.Id}" />
+                        </aura:iteration>
+                    </aura:if>
+                    <aura:if isTrue="{!v.imageDataUrlList.length > 0}">
+                        <aura:iteration items="{!v.imageDataUrlList}" var="img" indexVar="key">
+                            <img class="service-request-image" src="{!img.value}" />
+                        </aura:iteration>
+                    </aura:if>
+                    <aura:if isTrue="{!and(v.serviceRequest.urlsList.length == 0, v.serviceRequest.attachurlsList.length == 0, v.serviceRequest.awsImageList.length == 0)}">
+                        <img class="service-request-image" src="{!$Label.c.X11_Case_DefaultImage}" />
+                    </aura:if>
+                    <aura:if isTrue="{!v.serviceRequest.urlsList.length > 1 || v.serviceRequest.attachurlsList.length > 1 || v.serviceRequest.awsImageList.length > 1}">
+                        <lightning:icon iconName="utility:chevronleft" alternativeText="chevronleft" 
+                                        class="previous-icon" onclick="{!c.previousSlideClickHandler}" />
+                        <lightning:icon iconName="utility:chevronright" alternativeText="chevronright" 
+                                        class="next-icon" onclick="{!c.nextSlideClickHandler}" />
+                    </aura:if>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <aura:if isTrue="{!!empty(v.mapMarkers)}">
+        <lightning:map mapMarkers="{!v.mapMarkers}">
+        </lightning:map>
+    </aura:if>
+
+</aura:component>

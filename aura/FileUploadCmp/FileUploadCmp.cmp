@@ -1,0 +1,79 @@
+<aura:component extends="c:X11_BaseSuperComponent" controller="X11_EinsteinPrediction_Controller">
+
+    <aura:attribute name="uploadedFileData" type="list" />
+    <aura:attribute name="prefixURL" type="String" default="/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpg&amp;versionId=" />
+    
+    <aura:attribute name="predictedCaseType" type="String"/>
+    
+    <aura:attribute name="locationMapCenter" type="Object"/>
+    <aura:attribute name="isLocationIdentifiedFromImage" type="Boolean" default="false" />
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+	<ltng:require scripts="{!$Resource.ExifJavaScript}"/>
+    <aura:registerEvent name="FileUploadEvent" type="c:FileUploadEvent" />
+    <p class="posd-headerUpload">UPLOAD FILES</p>
+    
+    <div class="slds-box" draggable="false">
+        <div class="upload-file" draggable="true">
+            <span id="uploadSection" class="upload_btn">
+                <div class="dropZoneContainer">
+                    <input class="FileUpload" type="file" label="Attachment" name="fileUploader" multiple="true"
+                            onchange="{!c.handleFilesChange}" accept="{!$Label.c.X11_Accepted_File_Types}"
+                            disabled="{!v.uploadedFileData.length == 5}" />
+                    <div class="dropZoneIcon"></div>
+                </div>
+                <span class="slds-hide uploadError" aura:id="moreFilesError">{!$Label.c.X11_File_Upload_Max_Limit_Error}</span>
+                <div class="uploadFileWrapper">
+                    <p class="upload-text ">{!$Label.c.X11_Upload_Drop_Drag_Browse}</p>
+                    <div class="fileType ">
+                        <aura:unescapedHtml value="{!$Label.c.X11_File_Upload_Details}" />
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div class="slds-grid">
+        <aura:iteration items="{!v.uploadedFileData}" indexVar="index" var="item">
+            <aura:if isTrue="{!item.showImage}">
+                <div class="selFile">
+                    <a data-record="{!index}" onclick="{!c.removeFile}">
+                        <lightning:icon iconName="utility:close" size="small" alternativeText="close" />
+                    </a>
+                    <img src="{!item.fileData}" width="100" height="100" />
+                </div>
+                <aura:set attribute="else">
+                    <div class="selFile">
+                        <aura:if isTrue="{!item.filetype=='pdf'}">
+                            <a data-record="{!index}" onclick="{!c.removeFile}">
+                                <lightning:icon iconName="utility:close" size="small" alternativeText="close" /></a>
+                            <lightning:icon iconName="doctype:pdf" size="large" alternativeText="PDF" />
+                        </aura:if>
+                        <aura:if isTrue="{!item.filetype=='docx' || item.filetype=='doc'}">
+                            <a data-record="{!index}" onclick="{!c.removeFile}">
+                                <lightning:icon iconName="utility:close" size="small" alternativeText="close" /></a>
+                            <lightning:icon iconName="doctype:word" size="large" alternativeText="doc" />
+                        </aura:if>
+                        <aura:if isTrue="{!item.filetype=='xlsx' || item.filetype=='xls'}">
+                            <a data-record="{!index}" onclick="{!c.removeFile}">
+                                <lightning:icon iconName="utility:close" size="small" alternativeText="close" /></a>
+                            <lightning:icon iconName="doctype:excel" size="large" alternativeText="excel" />
+                        </aura:if>
+
+                        <aura:if isTrue="{!item.filetype=='unknown'}">
+
+                            <a data-record="{!index}" onclick="{!c.removeFile}">
+                                <lightning:icon class="imgcls" iconName="utility:close" size="small"
+                                    alternativeText="close" /></a>
+                            <lightning:icon iconName="doctype:unknown" size="large" alternativeText="unknown" />
+
+                        </aura:if>
+                    </div>
+                </aura:set>
+            </aura:if>
+        </aura:iteration>
+    </div>
+	<lightning:spinner
+      class="{!v.isLoading ? '' : 'slds-hide'}"
+      alternativeText="Loading"
+    />
+</aura:component>

@@ -1,0 +1,95 @@
+.THIS.x11_modal_backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-color: #111111;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+}
+.THIS.x11_modal_popup {
+    display: flex;
+    z-index: 1001;
+    position: fixed;
+    height: 100%;
+    background: #FFFFFF;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.THIS.x11_modal_popup .x11_modal_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    overflow: auto;
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 70px 30px;
+    font-size: 14px;
+    color: #333;
+    line-height: 25px;
+}
+.THIS .x11_modal_content .close {
+    position: fixed;
+    right: 30px;
+    top: 30px;
+}
+.THIS .x11_modal_content .close span {
+	display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.THIS .x11_modal_content .close span:before,
+.THIS .x11_modal_content .close span:after {
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #002d72;
+    content: '';
+    top: 50%;
+}
+.THIS .x11_modal_content .close span:before {
+    transform: rotate(45deg);
+}
+.THIS .x11_modal_content .close span:after {
+    transform: rotate(-45deg);
+}
+/*.THIS .x11_modal_content .title {
+    color: #002d72;
+    font-size: 35px;
+    font-weight: 600;
+    line-height: 33px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}*/
+.THIS .x11_modal_content .title img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+}
+
+@media only screen and (min-width: 768px) {
+    .THIS.x11_modal_popup {
+        background: transparent;
+    }
+    .THIS.x11_modal_popup .x11_modal_content {
+        max-width: 500px;
+        border-radius: 35px;
+        width: 50%;
+    }
+    .THIS .x11_modal_content .close {
+        position: absolute;
+        top: 20px;
+    }
+}

@@ -1,0 +1,35 @@
+<aura:component>
+    <div class="wrapper x11_footer_background">
+        <ul class="socialLinks">
+            <li>
+                <a href="{!$Label.c.X11_Footer_FacebookLink}">
+                    <img src="{!$Resource.X11Community_SocialIcons + '/facebook.svg'}" />
+                </a>
+            </li>
+            <li>
+                <a href="{!$Label.c.X11_Footer_TwitterLink}">
+                    <img src="{!$Resource.X11Community_SocialIcons + '/twitter.svg'}" />
+                </a>
+            </li>
+            <li>
+                <a href="{!$Label.c.X11_Footer_YoutubeLink}">
+                    <img src="{!$Resource.X11Community_SocialIcons + '/youtube.svg'}" />
+                </a>
+            </li>
+            <li>
+                <a href="{!$Label.c.X11_Footer_LinkedInLink}">
+                    <img src="{!$Resource.X11Community_SocialIcons + '/linkedin.svg'}" />
+                </a>
+            </li>
+            <li>
+                <a href="{!$Label.c.X11_Footer_InstagramLink}">
+                    <img src="{!$Resource.X11Community_SocialIcons + '/instagram.svg'}" />
+                </a>
+            </li>
+        </ul>
+        
+        <div class="copyright">
+            X11 Community 
+        </div>
+    </div>
+</aura:component>

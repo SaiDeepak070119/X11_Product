@@ -1,0 +1,65 @@
+.THIS .accordion-wrapper {
+    margin-bottom: 50px;
+    border-bottom: 1px solid #07344d;
+}
+.THIS .accordion-button {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: transparent;
+    padding: 20px 5px 20px 0px;
+    margin: 0;
+    cursor: pointer;
+    transition: 0.4s all ease;
+}
+.THIS .accordion-button:focus {
+    outline: none;
+}
+.THIS svg.slds-icon-text-default{
+    fill: #07344d;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.THIS .accordion-button .img_dash {
+    display: none;
+}
+.THIS .accordion-button.active .img_add {
+    display: none;
+}
+.THIS .accordion-button.active .img_dash {
+    display: block;
+}
+.THIS .accordion-content {
+    display: none;
+}
+.THIS .accordion-button.active + .accordion-content {
+    display: block;
+}
+.THIS .accordion-list-item {
+    border-top: 1px solid #07344d;
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.THIS .accordion-list-item .slds-icon-utility-chevronright + .slds-icon-utility-chevronright {
+    display: none;
+}
+.THIS .accordion-list-item:hover .slds-icon-utility-chevronright + .slds-icon-utility-chevronright {
+    display: inline-block;
+    margin-left: 10px;
+}
+.THIS .caseType {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.THIS .caseDescription {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+.THIS .caseEstimation {
+    font-weight: 600;
+    font-size: 12px;
+}

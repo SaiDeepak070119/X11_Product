@@ -1,0 +1,34 @@
+<!--********************************************************************************************
+ * NAME         :  X11_RI_Details_SingleChoice
+ * DESCRIPTION  :  This is a part of Detail page (Single Choice).
+ *
+ * @AUTHOR Samidha
+ * @DATE   28 April 2019
+ *
+ * MODIFICATION LOG:
+
+ * DATE        		DESCRIPTION
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ * 28 April 2019 	Initial Creation
+
+ * Parent component: X11_RI_Details
+************************************************************************************************-->
+<aura:component >
+    <aura:attribute name="detailsSingleChoiceQuestion" type="String" default="" description="Defines the text of the question to be displayed"/>
+    <aura:attribute name="options" type="List" default="[
+                                                        {'label': 'option 1', 'value': 'option1'},
+                                                        {'label': 'option 2', 'value': 'option2'},
+                                                        {'label': 'option 3', 'value': 'option3'},
+                                                        {'label': 'option 4', 'value': 'option4'}                                                   
+                                                        ]"/>
+    <aura:attribute name="value" type="String" default=""/>
+    <aura:registerEvent name="X11_RI_Details_QAEvent" type="c:X11_RI_Details_QAEvent"/>
+    <div class="details-comp-wrapper">
+        <div class="question-text">{!v.detailsSingleChoiceQuestion}</div>
+        <lightning:radioGroup name="radioGroup" class="yes-no-wrapper"
+                              options="{! v.options }"
+                              value="{! v.value }"
+                              type="radio"
+                              onchange="{! c.radioValueChange }"/>
+    </div>
+</aura:component>
